@@ -631,6 +631,52 @@ button {
   color: var(--rollmann-cyan);
 }
 
+.hero-brand-logos-headline {
+  margin-bottom: 22px;
+}
+
+.hero-brand-badges-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.hero-brand-pill {
+  background: var(--white);
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  border: 1.5px solid transparent;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-brand-pill:hover {
+  transform: translateY(-2px);
+  border-color: var(--rollmann-cyan);
+  box-shadow: 0 6px 20px rgba(0, 173, 239, 0.35);
+}
+
+.brand-name-bold {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  color: var(--navy-deep);
+  line-height: 1;
+}
+
+.brand-sub-tag {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--gray-600);
+  margin-top: 4px;
+}
+
 .hero-desc {
   font-size: 15px;
   line-height: 1.6;
