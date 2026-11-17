@@ -297,7 +297,136 @@ class RollmannApp {
     this.initLifeCalculator();
     this.initToleranceVisualizer();
     this.initBlueprintInspector();
+    this.initHeroQuickSearch();
     this.updateBomBadge();
+  }
+
+  initHeroQuickSearch() {
+    const input = document.getElementById('heroQuickInput');
+    const btn = document.getElementById('heroQuickBtn');
+    const popup = document.getElementById('quickResultPopup');
+    const title = document.getElementById('popupTitle');
+    const content = document.getElementById('popupContent');
+    const actions = document.getElementById('popupActions');
+    const closeBtn = document.getElementById('popupCloseBtn');
+
+    if (!input || !popup) return;
+
+    const performLookup = () => {
+      const q = input.value.trim().toLowerCase();
+      if (!q) {
+        input.focus();
+        return;
+      }
+
+      const qRaw = input.value.trim();
+
+      if (q.includes('where') || q.includes('location') || q.includes('office') || q.includes('warehouse') || q.includes('address') || q.includes('branch') || q.includes('hub')) {
+        title.innerHTML = '<i class="fa-solid fa-warehouse" style="color:var(--rollmann-cyan);"></i> 5 Offices &amp; 3 Warehouses';
+        content.innerHTML = `
+          <div class="popup-status-badge"><i class="fa-solid fa-circle-check"></i> Nationwide Distribution Network</div>
+          <p style="margin-bottom:8px;">Rollmann operates 5 regional offices and 3 central warehouses located in <strong>Bengaluru (Headquarters)</strong>, <strong>Pune (MIDC Bhosari)</strong>, and <strong>New Delhi</strong>, with regional desks in <strong>Ahmedabad</strong> and <strong>Chennai</strong>.</p>
+          <div style="font-size:11.5px; color:var(--gray-600); background:var(--gray-50); padding:8px 10px; border-radius:4px;">
+            Same-day dispatch available across India for standard inventory.
+          </div>
+        `;
+        actions.innerHTML = `
+          <a href="contact-us.html" class="popup-btn-primary">View Nationwide Hubs &rarr;</a>
+          <a href="tel:+918026609630" class="popup-btn-secondary"><i class="fa-solid fa-phone"></i> Call 080 26609630</a>
+        `;
+        popup.classList.add('active');
+        return;
+      }
+
+      if (q.includes('cut') || q.includes('machin') || q.includes('shaft') || q.includes('journal') || q.includes('chamfer') || q.includes('bk') || q.includes('bf')) {
+        title.innerHTML = '<i class="fa-solid fa-wrench" style="color:var(--rollmann-cyan);"></i> In-House CNC Machining';
+        content.innerHTML = `
+          <div class="popup-status-badge"><i class="fa-solid fa-circle-check"></i> Precision Workshop Available</div>
+          <p style="margin-bottom:8px;">We offer abrasive cold rail cutting to <strong>&plusmn;0.2 mm</strong> tolerance, custom G-dimension pitch matching, and CNC ball screw journal turning for BK/BF/FK/FF support units.</p>
+        `;
+        actions.innerHTML = `
+          <a href="services.html" class="popup-btn-primary">View Machining Specs &rarr;</a>
+          <a href="contact-us.html" class="popup-btn-secondary">Send Drawing for Quote</a>
+        `;
+        popup.classList.add('active');
+        return;
+      }
+
+      if (q.includes('genuine') || q.includes('auth') || q.includes('cert') || q.includes('japan') || q.includes('warranty') || q.includes('original')) {
+        title.innerHTML = '<i class="fa-solid fa-award" style="color:var(--rollmann-cyan);"></i> 100% Genuine Certified Imports';
+        content.innerHTML = `
+          <div class="popup-status-badge"><i class="fa-solid fa-circle-check"></i> Official THK Stockist</div>
+          <p style="margin-bottom:8px;">All products are direct factory imports from THK Japan, Tsubaki, Oiles, Zimmer Group, and INA, accompanied by JIS manufacturer inspection certificates and serial traceability.</p>
+        `;
+        actions.innerHTML = `
+          <a href="about-us.html" class="popup-btn-primary">About Our Heritage &rarr;</a>
+          <a href="contact-us.html" class="popup-btn-secondary">Contact Technical Desk</a>
+        `;
+        popup.classList.add('active');
+        return;
+      }
+
+      const exact = ROLLMANN_PARTS_DB.find(p => p.code.toLowerCase() === q);
+      const partial = exact || ROLLMANN_PARTS_DB.find(p => p.code.toLowerCase().includes(q) || p.category.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q));
+
+      if (partial) {
+        title.innerHTML = `<i class="fa-solid fa-microchip" style="color:var(--rollmann-cyan);"></i> ${partial.brand} ${partial.code}`;
+        content.innerHTML = `
+          <div class="popup-status-badge"><i class="fa-solid fa-circle-check"></i> ${partial.stock || 'In Stock'}</div>
+          <div style="font-size:12px; font-weight:700; color:var(--navy-deep); margin-bottom:4px;">${partial.category}</div>
+          <p style="font-size:11.5px; color:var(--gray-600); margin-bottom:8px;">${partial.desc || ''}</p>
+          <div class="popup-specs-grid">
+            <div class="popup-spec-item"><strong>Bore:</strong> ${partial.dr ? partial.dr + ' mm' : '-'}</div>
+            <div class="popup-spec-item"><strong>Outer Dia:</strong> ${partial.D ? partial.D + ' mm' : '-'}</div>
+            <div class="popup-spec-item"><strong>Length:</strong> ${partial.L ? partial.L + ' mm' : '-'}</div>
+            <div class="popup-spec-item"><strong>Dynamic C:</strong> ${partial.C ? partial.C + ' N' : '-'}</div>
+          </div>
+          <div style="font-size:11px; color:var(--gray-500);">Shaft Fit: ISO 286 g6 / h6 &bull; Lead Time: ${partial.leadTime || 'Immediate'}</div>
+        `;
+        const link = partial.code.startsWith('LM') ? 'linear-bush.html' : 'products.html?q=' + encodeURIComponent(partial.code);
+        actions.innerHTML = `
+          <a href="${link}" class="popup-btn-primary">View Full Specs / CAD &rarr;</a>
+          <a href="contact-us.html" class="popup-btn-secondary">Request Fast Quote</a>
+        `;
+        popup.classList.add('active');
+        return;
+      }
+
+      title.innerHTML = `<i class="fa-solid fa-magnifying-glass" style="color:var(--rollmann-cyan);"></i> Search: "${qRaw}"`;
+      content.innerHTML = `
+        <div class="popup-status-badge"><i class="fa-solid fa-warehouse"></i> 25,000+ SKUs Central Stock</div>
+        <p style="margin-bottom:8px;">We stock thousands of linear guides, bushings, ball screws, and clamps. Our engineering desk can confirm immediate stock for "<strong>${qRaw}</strong>".</p>
+      `;
+      actions.innerHTML = `
+        <a href="products.html?q=${encodeURIComponent(qRaw)}" class="popup-btn-primary">Search Catalog &rarr;</a>
+        <a href="contact-us.html" class="popup-btn-secondary">Inquire with Sales</a>
+      `;
+      popup.classList.add('active');
+    };
+
+    if (btn) btn.addEventListener('click', performLookup);
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        performLookup();
+      }
+      if (e.key === 'Escape') {
+        popup.classList.remove('active');
+      }
+    });
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        popup.classList.remove('active');
+      });
+    }
+
+    document.addEventListener('click', (e) => {
+      const box = document.getElementById('heroQuickBox');
+      if (box && !box.contains(e.target)) {
+        popup.classList.remove('active');
+      }
+    });
   }
 
   loadBom() {

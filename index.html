@@ -418,13 +418,26 @@
           <span style="font-size:11px; background:var(--navy-deep); color:var(--rollmann-cyan); padding:2px 8px; border-radius:3px; border:1px solid var(--rollmann-cyan);">Direct Importer</span>
         </div>
 
-        <div class="part-search-quickbox">
+        <div class="part-search-quickbox" id="heroQuickBox">
           <label class="quickbox-label">Search Technical Data &amp; Availability</label>
           <div class="quickbox-input-row">
-            <input type="text" class="quickbox-input" placeholder="e.g. LM20UU, HSR25, BNK1520" id="heroQuickInput">
-            <button type="button" class="quickbox-btn" onclick="const v = document.getElementById('heroQuickInput').value.trim(); if(v) window.location.href='products.html?q=' + encodeURIComponent(v);">
+            <input type="text" class="quickbox-input" placeholder="Ask question or part no. (e.g. LM20UU, warehouses)" id="heroQuickInput" autocomplete="off">
+            <button type="button" class="quickbox-btn" id="heroQuickBtn">
               Inspect
             </button>
+          </div>
+
+          <div class="quick-result-popup" id="quickResultPopup">
+            <div class="popup-header">
+              <div class="popup-title" id="popupTitle">
+                <i class="fa-solid fa-microchip" style="color:var(--rollmann-cyan);"></i> Technical Result
+              </div>
+              <button type="button" class="popup-close" id="popupCloseBtn" aria-label="Close popup">&times;</button>
+            </div>
+            <div class="popup-body" id="popupContent">
+            </div>
+            <div class="popup-actions" id="popupActions">
+            </div>
           </div>
         </div>
 
@@ -434,8 +447,8 @@
             <div class="stat-tile-lbl">Line Items In Stock</div>
           </div>
           <div class="stat-tile">
-            <div class="stat-tile-val">5 Central</div>
-            <div class="stat-tile-lbl">Warehousing Hubs</div>
+            <div class="stat-tile-val">5 &bull; 3</div>
+            <div class="stat-tile-lbl">5 Offices &bull; 3 Warehouses</div>
           </div>
           <div class="stat-tile">
             <div class="stat-tile-val">&plusmn;0.2 mm</div>
@@ -449,19 +462,6 @@
       </div>
     </div>
   </section>
-
-  <div class="brands-strip">
-    <div class="container brands-strip-inner">
-      <div class="brands-strip-label">Authorized Technology Partners:</div>
-      <div class="brands-logos-list">
-        <div class="brand-badge-item thk"><i class="fa-solid fa-circle-check"></i> THK Co., Ltd. (Japan)</div>
-        <div class="brand-badge-item"><i class="fa-solid fa-circle-check"></i> OILES Corporation</div>
-        <div class="brand-badge-item"><i class="fa-solid fa-circle-check"></i> ZIMMER Group</div>
-        <div class="brand-badge-item"><i class="fa-solid fa-circle-check"></i> FAG / INA</div>
-        <div class="brand-badge-item"><i class="fa-solid fa-circle-check"></i> Rollmann CNC Machine Shop</div>
-      </div>
-    </div>
-  </div>
 
   <section class="container" id="calcSection">
     <div class="calc-workbench-box">
