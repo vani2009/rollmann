@@ -1442,16 +1442,15 @@ button {
   gap: 10px;
   flex-wrap: wrap;
 }
-}
 
 .spotlight-box {
-  background: var(--navy-dark);
-  color: var(--white);
+  background: linear-gradient(145deg, #001A33 0%, #002B52 100%);
+  color: #FFFFFF;
   border-radius: var(--radius-lg);
-  padding: 36px;
+  padding: 38px;
   margin: 40px 0;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--navy-border);
+  box-shadow: 0 16px 40px rgba(0, 26, 51, 0.35);
+  border: 1px solid rgba(0, 173, 239, 0.4);
 }
 
 .spotlight-grid {
@@ -1496,10 +1495,22 @@ button {
 }
 
 .spot-spec-cell {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 10px;
+  background: rgba(0, 26, 51, 0.65);
+  border: 1px solid rgba(0, 173, 239, 0.3);
+  padding: 12px 14px;
   border-radius: var(--radius-sm);
+}
+
+.spotlight-box .btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.spotlight-box .btn-secondary:hover {
+  background: rgba(0, 173, 239, 0.2);
+  border-color: #00ADEF;
+  color: #FFFFFF;
 }
 
 .spot-spec-label {
@@ -1517,8 +1528,8 @@ button {
 }
 
 .schematic-box {
-  background: var(--navy-dark);
-  border: 1px solid var(--navy-border);
+  background: #001224;
+  border: 1px solid rgba(0, 173, 239, 0.4);
   border-radius: var(--radius-md);
   padding: 24px;
   text-align: center;
