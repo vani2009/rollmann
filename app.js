@@ -298,6 +298,7 @@ class RollmannApp {
     this.initToleranceVisualizer();
     this.initBlueprintInspector();
     this.initHeroQuickSearch();
+    this.initPartBreakdown();
     this.updateBomBadge();
   }
 
@@ -1078,6 +1079,296 @@ class RollmannApp {
     if (boreMaxFilter) boreMaxFilter.addEventListener('input', applyFilter);
     if (loadMinFilter) loadMinFilter.addEventListener('input', applyFilter);
   }
+
+  initPartBreakdown() {
+    const seriesInput = document.getElementById('breakdownSeriesInput');
+    const seriesPills = document.querySelectorAll('#seriesQuickPills .wizard-pill');
+    const diaInput = document.getElementById('breakdownDiaInput');
+    const diaPillsContainer = document.getElementById('diaQuickPills');
+    const sealPillsContainer = document.getElementById('sealQuickPills');
+
+    const resBrandTag = document.getElementById('resBrandTag');
+    const resPartCode = document.getElementById('resPartCode');
+    const resPartName = document.getElementById('resPartName');
+    const resStockPill = document.getElementById('resStockPill');
+    const nomToken1 = document.getElementById('nomToken1');
+    const nomLbl1 = document.getElementById('nomLbl1');
+    const nomToken2 = document.getElementById('nomToken2');
+    const nomLbl2 = document.getElementById('nomLbl2');
+    const nomToken3 = document.getElementById('nomToken3');
+    const nomLbl3 = document.getElementById('nomLbl3');
+    const specDr = document.getElementById('specValDr');
+    const specD = document.getElementById('specValD');
+    const specL = document.getElementById('specValL');
+    const specC = document.getElementById('specValC');
+    const specC0 = document.getElementById('specValC0');
+    const specFit = document.getElementById('specValFit');
+    const cadLink = document.getElementById('resCadLink');
+    const addBomBtn = document.getElementById('resAddBomBtn');
+
+    if (!seriesInput || !resPartCode) return;
+
+    const breakdownCatalog = {
+      LM: {
+        brand: 'THK JAPAN AUTHENTIC',
+        name: 'Precision Cylindrical Linear Bushing',
+        seriesDesc: 'Linear Bushing Series',
+        cadUrl: 'linear-bush.html',
+        diameters: {
+          6: { D: 12, L: 19, C: 206, C0: 265, fit: 'ISO 286 g6 / h6', stock: 'Bengaluru (Immediate)' },
+          8: { D: 15, L: 24, C: 265, C0: 402, fit: 'ISO 286 g6 / h6', stock: 'Bengaluru / Pune (Immediate)' },
+          10: { D: 19, L: 29, C: 372, C0: 549, fit: 'ISO 286 g6 / h6', stock: 'Pune (Immediate)' },
+          12: { D: 21, L: 30, C: 410, C0: 590, fit: 'ISO 286 g6 / h6', stock: 'Bengaluru / Delhi (Immediate)' },
+          16: { D: 28, L: 37, C: 775, C0: 1180, fit: 'ISO 286 g6 / h6', stock: 'Bengaluru / Pune (Immediate)' },
+          20: { D: 32, L: 42, C: 860, C0: 1370, fit: 'ISO 286 g6 / h6', stock: 'Bengaluru / Pune (Immediate)' },
+          25: { D: 40, L: 59, C: 980, C0: 1570, fit: 'ISO 286 g6 / h6', stock: 'Bengaluru / Pune (Immediate)' },
+          30: { D: 45, L: 64, C: 1570, C0: 2740, fit: 'ISO 286 g6 / h6', stock: 'Bengaluru (Immediate)' },
+          40: { D: 60, L: 80, C: 2160, C0: 4020, fit: 'ISO 286 g6 / h6', stock: 'Pune / Delhi (24 Hrs)' },
+          50: { D: 80, L: 100, C: 3820, C0: 7940, fit: 'ISO 286 g6 / h6', stock: 'Bengaluru (24 Hrs)' }
+        },
+        seals: [
+          { key: 'UU', label: 'Double Nitrile Rubber Lip Seals', suffix: 'UU' },
+          { key: 'U', label: 'Single Nitrile Rubber Lip Seal', suffix: 'U' },
+          { key: 'None', label: 'Standard Open Ends (No Rubber Seals)', suffix: '' },
+          { key: 'AJ', label: 'Clearance-Adjustable Slit Outer Cylinder', suffix: '-AJ' },
+          { key: 'OP', label: 'Open Type (60 Deg Cutout for Continuous Shaft)', suffix: '-OP' },
+          { key: 'GA', label: 'High-Temp Metal Retainer (up to 120 Deg C)', suffix: 'GA' }
+        ]
+      },
+      HSR: {
+        brand: 'THK JAPAN AUTHENTIC',
+        name: 'Heavy-Load 4-Way Equal Load LM Guide',
+        seriesDesc: 'Heavy Load LM Guide Series',
+        cadUrl: 'lm-guide.html',
+        diameters: {
+          15: { D: 47, L: 60, C: 14300, C0: 25100, fit: 'JIS H/P Precision', stock: 'Bengaluru / Pune (Immediate)' },
+          20: { D: 63, L: 76, C: 21100, C0: 36700, fit: 'JIS H/P Precision', stock: 'Bengaluru / Pune (Immediate)' },
+          25: { D: 70, L: 88, C: 35200, C0: 59700, fit: 'JIS H/P Precision', stock: 'Bengaluru / Pune (Immediate)' },
+          30: { D: 90, L: 106, C: 53300, C0: 89300, fit: 'JIS H/P Precision', stock: 'Pune / Delhi (Immediate)' },
+          35: { D: 100, L: 122, C: 71200, C0: 119000, fit: 'JIS H/P Precision', stock: 'Bengaluru (Immediate)' }
+        },
+        seals: [
+          { key: 'A', label: 'Flange Type Block (Top/Bottom Tapped)', suffix: 'A' },
+          { key: 'B', label: 'Flange Type Block (Through Mounting Holes)', suffix: 'B' },
+          { key: 'R', label: 'Square Compact Block (Narrow Width Tapped)', suffix: 'R' },
+          { key: 'UU', label: 'Standard End Dust Seals', suffix: 'UU' },
+          { key: 'SS', label: 'Double End Seals + Side Scrapers', suffix: 'SS' }
+        ]
+      },
+      SHS: {
+        brand: 'THK JAPAN AUTHENTIC',
+        name: 'Caged Ball Ultra-Quiet LM Guide',
+        seriesDesc: 'Caged Ball Low-Noise Series',
+        cadUrl: 'lm-guide.html',
+        diameters: {
+          15: { D: 47, L: 64, C: 17200, C0: 27900, fit: 'JIS H/P Precision', stock: 'Bengaluru (Immediate)' },
+          20: { D: 63, L: 79, C: 27500, C0: 44700, fit: 'JIS H/P Precision', stock: 'Bengaluru / Pune (Immediate)' },
+          25: { D: 70, L: 92, C: 41700, C0: 67400, fit: 'JIS H/P Precision', stock: 'Bengaluru / Pune (Immediate)' },
+          30: { D: 90, L: 111, C: 61900, C0: 100000, fit: 'JIS H/P Precision', stock: 'Pune (Immediate)' }
+        },
+        seals: [
+          { key: 'C', label: 'Flange Type Caged Ball Block', suffix: 'C' },
+          { key: 'V', label: 'Square Type Compact Caged Ball Block', suffix: 'V' },
+          { key: 'UU', label: 'Standard End Seals', suffix: 'UU' },
+          { key: 'SS', label: 'End Seals + Laminated Scrapers', suffix: 'SS' }
+        ]
+      },
+      BNK: {
+        brand: 'THK JAPAN AUTHENTIC',
+        name: 'Precision Ground High-Accuracy Ball Screw',
+        seriesDesc: 'Ground Ball Screw Series',
+        cadUrl: 'ball-screws.html',
+        diameters: {
+          15: { D: 48, L: 500, C: 7400, C0: 14700, fit: 'JIS C3/C5 Preloaded', stock: 'Bengaluru Workshop' },
+          20: { D: 58, L: 800, C: 11800, C0: 25500, fit: 'JIS C3/C5 Preloaded', stock: 'Bengaluru / Pune Workshop' },
+          25: { D: 70, L: 1000, C: 16700, C0: 38200, fit: 'JIS C3/C5 Preloaded', stock: 'Pune Workshop' }
+        },
+        seals: [
+          { key: 'RR', label: 'Double Brush Labyrinth Seals', suffix: '-RR' },
+          { key: 'ZZ', label: 'End Deflector High-Speed Seals', suffix: '-ZZ' }
+        ]
+      },
+      CF: {
+        brand: 'THK JAPAN AUTHENTIC',
+        name: 'Precision Cam Follower (Stud Type)',
+        seriesDesc: 'Stud-Type Cam Follower',
+        cadUrl: 'products.html?category=Cam%20Follower',
+        diameters: {
+          6: { D: 16, L: 28, C: 3590, C0: 3650, fit: 'JIS Hex Stud M6x1.0', stock: 'Bengaluru / Pune (Immediate)' },
+          10: { D: 22, L: 36, C: 5390, C0: 6860, fit: 'JIS Hex Stud M10x1.25', stock: 'Bengaluru / Pune (Immediate)' },
+          12: { D: 30, L: 40, C: 7850, C0: 9790, fit: 'JIS Hex Stud M12x1.5', stock: 'Bengaluru / Pune (Immediate)' },
+          16: { D: 35, L: 52, C: 12000, C0: 18300, fit: 'JIS Hex Stud M16x1.5', stock: 'Bengaluru / Pune (Immediate)' },
+          20: { D: 52, L: 66, C: 24700, C0: 37200, fit: 'JIS Hex Stud M20x1.5', stock: 'Pune / Delhi (Immediate)' }
+        },
+        seals: [
+          { key: 'UU', label: 'Synthetic Rubber Contact Seals Both Sides', suffix: 'UU' },
+          { key: 'B', label: 'Hexagonal Socket Stud Head', suffix: '-B' },
+          { key: 'None', label: 'Standard Cage-Guided Open Type', suffix: '' }
+        ]
+      },
+      RB: {
+        brand: 'THK JAPAN AUTHENTIC',
+        name: 'Cross-Roller Ring (Separable Outer Ring)',
+        seriesDesc: 'Cross-Roller Ring Series',
+        cadUrl: 'products.html?category=Cross%20Roller',
+        diameters: {
+          20: { D: 36, L: 8, C: 2900, C0: 2700, fit: 'JIS Precision Rotary Fit', stock: 'Bengaluru (Immediate)' },
+          30: { D: 55, L: 12, C: 7350, C0: 8350, fit: 'JIS Precision Rotary Fit', stock: 'Bengaluru / Pune (Immediate)' },
+          50: { D: 80, L: 13, C: 14700, C0: 20600, fit: 'JIS Precision Rotary Fit', stock: 'Bengaluru / Delhi (Immediate)' }
+        },
+        seals: [
+          { key: 'UU', label: 'Rubber Seals on Both Sides', suffix: 'UU' },
+          { key: 'Open', label: 'Open Type / Low Rotational Torque', suffix: '' }
+        ]
+      },
+      SPB: {
+        brand: 'OILES JAPAN',
+        name: 'Oiles 500SP Self-Lubricating Bushing',
+        seriesDesc: 'Solid Lubricant Embedded Bronze',
+        cadUrl: 'products.html?brand=Oiles',
+        diameters: {
+          20: { D: 28, L: 30, C: 49000, C0: 98000, fit: 'Shaft d8 / Housing H7', stock: 'Bengaluru / Pune (Immediate)' },
+          25: { D: 33, L: 35, C: 61000, C0: 122000, fit: 'Shaft d8 / Housing H7', stock: 'Bengaluru / Pune (Immediate)' },
+          30: { D: 38, L: 40, C: 75000, C0: 150000, fit: 'Shaft d8 / Housing H7', stock: 'Pune / Delhi (Immediate)' }
+        },
+        seals: [
+          { key: 'Bronze', label: 'High-Strength Brass with Graphite Plugs', suffix: '' }
+        ]
+      }
+    };
+
+    let curSeries = 'LM';
+    let curDia = 20;
+    let curSeal = 'UU';
+
+    const renderDiaPills = () => {
+      const seriesData = breakdownCatalog[curSeries] || breakdownCatalog.LM;
+      const diaKeys = Object.keys(seriesData.diameters).map(Number);
+      if (!diaKeys.includes(Number(curDia))) {
+        curDia = diaKeys[Math.floor(diaKeys.length / 2)] || diaKeys[0];
+        diaInput.value = curDia;
+      }
+      diaPillsContainer.innerHTML = diaKeys.map(d => '<button type="button" class="wizard-pill ' + (Number(d) === Number(curDia) ? 'active' : '') + '" data-dia="' + d + '">&Oslash; ' + d + ' mm</button>').join('');
+
+      diaPillsContainer.querySelectorAll('.wizard-pill').forEach(btn => {
+        btn.addEventListener('click', () => {
+          diaPillsContainer.querySelectorAll('.wizard-pill').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          curDia = Number(btn.getAttribute('data-dia'));
+          diaInput.value = curDia;
+          updateOutput();
+        });
+      });
+    };
+
+    const renderSealPills = () => {
+      const seriesData = breakdownCatalog[curSeries] || breakdownCatalog.LM;
+      const seals = seriesData.seals;
+      const validKeys = seals.map(s => s.key);
+      if (!validKeys.includes(curSeal)) {
+        curSeal = seals[0].key;
+      }
+      sealPillsContainer.innerHTML = seals.map(s => '<button type="button" class="wizard-pill ' + (s.key === curSeal ? 'active' : '') + '" data-seal="' + s.key + '">' + s.key + ' (' + s.label.split(' ')[0] + ')</button>').join('');
+
+      sealPillsContainer.querySelectorAll('.wizard-pill').forEach(btn => {
+        btn.addEventListener('click', () => {
+          sealPillsContainer.querySelectorAll('.wizard-pill').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          curSeal = btn.getAttribute('data-seal');
+          updateOutput();
+        });
+      });
+    };
+
+    const updateOutput = () => {
+      const seriesData = breakdownCatalog[curSeries] || breakdownCatalog.LM;
+      const diaData = seriesData.diameters[curDia] || Object.values(seriesData.diameters)[0];
+      const sealData = seriesData.seals.find(s => s.key === curSeal) || seriesData.seals[0];
+
+      let fullCode = curSeries + curDia + sealData.suffix;
+      if (curSeries === 'BNK') {
+        fullCode = curSeries + curDia + '20' + sealData.suffix;
+      }
+
+      resBrandTag.textContent = seriesData.brand;
+      resPartCode.textContent = fullCode;
+      resPartName.textContent = seriesData.name;
+      resStockPill.innerHTML = '<i class="fa-solid fa-circle-check"></i> In Stock (' + diaData.stock + ')';
+
+      nomToken1.textContent = curSeries;
+      nomLbl1.textContent = seriesData.seriesDesc;
+
+      nomToken2.textContent = curDia + 'mm';
+      nomLbl2.textContent = curDia + 'mm Bore / Shaft Dimension';
+
+      nomToken3.textContent = sealData.key;
+      nomLbl3.textContent = sealData.label;
+
+      specDr.textContent = curDia + ' mm';
+      specD.textContent = diaData.D + ' mm';
+      specL.textContent = diaData.L + ' mm';
+      specC.textContent = diaData.C.toLocaleString() + ' N';
+      specC0.textContent = diaData.C0.toLocaleString() + ' N';
+      specFit.textContent = diaData.fit;
+
+      if (cadLink) {
+        cadLink.href = seriesData.cadUrl;
+      }
+    };
+
+    seriesPills.forEach(btn => {
+      btn.addEventListener('click', () => {
+        seriesPills.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        curSeries = btn.getAttribute('data-series');
+        seriesInput.value = curSeries;
+        renderDiaPills();
+        renderSealPills();
+        updateOutput();
+      });
+    });
+
+    seriesInput.addEventListener('input', () => {
+      const typed = seriesInput.value.trim().toUpperCase();
+      const matched = Object.keys(breakdownCatalog).find(k => k === typed || typed.startsWith(k));
+      if (matched) {
+        curSeries = matched;
+        seriesPills.forEach(b => {
+          if (b.getAttribute('data-series') === matched) b.classList.add('active');
+          else b.classList.remove('active');
+        });
+        renderDiaPills();
+        renderSealPills();
+        updateOutput();
+      }
+    });
+
+    diaInput.addEventListener('input', () => {
+      const num = parseInt(diaInput.value.trim());
+      const seriesData = breakdownCatalog[curSeries] || breakdownCatalog.LM;
+      if (num && seriesData.diameters[num]) {
+        curDia = num;
+        diaPillsContainer.querySelectorAll('.wizard-pill').forEach(b => {
+          if (Number(b.getAttribute('data-dia')) === num) b.classList.add('active');
+          else b.classList.remove('active');
+        });
+        updateOutput();
+      }
+    });
+
+    if (addBomBtn) {
+      addBomBtn.addEventListener('click', () => {
+        const code = resPartCode.textContent.trim();
+        this.addToBom(code, 1, 'Configured via Guided Breakdown Tool');
+        this.openBomDrawer();
+      });
+    }
+
+    renderDiaPills();
+    renderSealPills();
+    updateOutput();
+  }
+
 }
 
 let rollmannApp;
