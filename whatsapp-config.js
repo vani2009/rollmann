@@ -1,0 +1,71 @@
+const ROLLMANN_WHATSAPP_CONFIG = {
+  BRANCHES: {
+    Delhi: { number: "919910322150", label: "New Delhi Warehouse Hub" },
+    Pune: { number: "918147354218", label: "Pune MIDC Bhosari Desk" },
+    Ahmedabad: { number: "919958550409", label: "Ahmedabad Branch Desk" },
+    Chennai: { number: "918122092712", label: "Chennai Regional Desk" },
+    Bengaluru: { number: "91XXXXXXXXXX", label: "Bengaluru Headquarters" }
+  },
+  DEFAULT_BRANCH: "Bengaluru",
+  STATE_TO_BRANCH: {
+    "Delhi": "Delhi",
+    "Haryana": "Delhi",
+    "Punjab": "Delhi",
+    "Uttar Pradesh": "Delhi",
+    "Uttarakhand": "Delhi",
+    "Himachal Pradesh": "Delhi",
+    "Jammu and Kashmir": "Delhi",
+    "Chandigarh": "Delhi",
+    "Maharashtra": "Pune",
+    "Goa": "Pune",
+    "Madhya Pradesh": "Pune",
+    "Chhattisgarh": "Pune",
+    "Gujarat": "Ahmedabad",
+    "Rajasthan": "Ahmedabad",
+    "Tamil Nadu": "Chennai",
+    "Kerala": "Chennai",
+    "Puducherry": "Chennai",
+    "Karnataka": "Bengaluru",
+    "Andhra Pradesh": "Bengaluru",
+    "Telangana": "Bengaluru",
+    "Odisha": "Bengaluru",
+    "West Bengal": "Bengaluru"
+  },
+  CITY_TO_BRANCH: {
+    "delhi": "Delhi",
+    "new delhi": "Delhi",
+    "gurgaon": "Delhi",
+    "gurugram": "Delhi",
+    "noida": "Delhi",
+    "faridabad": "Delhi",
+    "ghaziabad": "Delhi",
+    "pune": "Pune",
+    "mumbai": "Pune",
+    "navi mumbai": "Pune",
+    "thane": "Pune",
+    "nagpur": "Pune",
+    "aurangabad": "Pune",
+    "nashik": "Pune",
+    "ahmedabad": "Ahmedabad",
+    "surat": "Ahmedabad",
+    "vadodara": "Ahmedabad",
+    "rajkot": "Ahmedabad",
+    "jaipur": "Ahmedabad",
+    "chennai": "Chennai",
+    "coimbatore": "Chennai",
+    "madurai": "Chennai",
+    "kochi": "Chennai",
+    "trivandrum": "Chennai",
+    "bengaluru": "Bengaluru",
+    "bangalore": "Bengaluru",
+    "mysuru": "Bengaluru",
+    "hyderabad": "Bengaluru",
+    "visakhapatnam": "Bengaluru"
+  },
+  GATE_DOWNLOADS: false,
+  FORM_ENDPOINT: "https://formspree.io/f/YOUR_FORM_KEY"
+};
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = ROLLMANN_WHATSAPP_CONFIG;
+}

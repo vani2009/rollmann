@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download Brand Catalogues &amp; Technical Manuals | Rollmann India</title>
+  <meta name="description" content="Download official manufacturer engineering catalogs for THK Japan, Tsubaki, Oiles, Zimmer Group, INA, and FAG bearings. PDF downloads with full load ratings and CAD references.">
+  <link rel="canonical" href="https://rollmann.in/catalogues.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-bar-left">
+        <span class="top-bar-badge"><i class="fa-solid fa-award"></i> AUTHORIZED INDUSTRIAL STOCKIST</span>
+        <span><i class="fa-solid fa-certificate" style="color:var(--rollmann-cyan); margin-right:4px;"></i> ISO 9001:2015 Traceability</span>
+      </div>
+      <div class="top-bar-right">
+        <a href="tel:+918026609630" class="top-link"><i class="fa-solid fa-phone"></i> 080 26609630</a>
+        <a href="mailto:sales@rollmann.in" class="top-link"><i class="fa-solid fa-envelope"></i> sales@rollmann.in</a>
+        <a href="contact-us.html" class="top-link"><i class="fa-solid fa-warehouse"></i> 5 Offices &bull; 3 Warehouses</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="main-header">
+    <div class="container header-main-row">
+      <a href="index.html" class="brand-logo">
+        <img src="images/rollmann_logo_white_bg.png" alt="Rollmann Trading Company" class="brand-logo-img">
+      </a>
+
+      <div class="header-search-wrap">
+        <div class="header-search-box">
+          <select class="search-category-select">
+            <option value="all">All Catalog</option>
+            <option value="LM">Linear Bushings</option>
+            <option value="HSR">LM Guides</option>
+            <option value="Ball">Ball Screws</option>
+            <option value="Oiles">Oiles Bearings</option>
+          </select>
+          <input type="text" id="globalSearchInput" class="header-search-input" placeholder="Search part number (e.g. LM20UU, HSR25, BNK, Oiles)..." autocomplete="off">
+          <button type="button" class="header-search-btn" onclick="document.getElementById('globalSearchInput').focus()">
+            <i class="fa-solid fa-magnifying-glass"></i> Search
+          </button>
+        </div>
+        <div id="searchSuggestDropdown" class="search-suggest-dropdown"></div>
+      </div>
+
+      <div class="header-actions">
+        <button type="button" class="header-rfq-btn open-rfq-drawer" aria-label="Open Project BOM">
+          <div class="rfq-icon-wrap">
+            <i class="fa-solid fa-layer-group"></i>
+          </div>
+          <div>
+            <div style="font-size:10px; text-transform:uppercase; color:var(--gray-500); letter-spacing:0.04em;">Engineering</div>
+            <div style="font-weight:700; font-size:13px; color:var(--navy-deep);">Project BOM</div>
+          </div>
+          <span class="rfq-count-badge" id="headerRfqBadge">0</span>
+        </button>
+
+        <a href="contact-us.html" class="primary-rfq-btn">
+          Engineering Inquiry
+        </a>
+
+        <button type="button" class="mobile-menu-toggle" aria-label="Toggle navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav-bar">
+    <div class="container nav-bar-inner">
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="index.html" class="nav-link">Overview</a></li>
+
+        <li class="nav-item">
+          <a href="products.html" class="nav-link">
+            Industry <i class="fa-solid fa-chevron-down"></i>
+          </a>
+          <ul class="nav-dropdown">
+            <li><a href="products.html?ind=automotive">Automotive &amp; EV<span class="nav-dropdown-sub">Chassis, robotic welding, battery cells</span></a></li>
+            <li><a href="products.html?ind=machinetools">Machine Tools &amp; CNC<span class="nav-dropdown-sub">Milling, turning, grinding, EDM axes</span></a></li>
+            <li><a href="products.html?ind=robotics">Robotics &amp; Automation<span class="nav-dropdown-sub">Articulated arms, pick-and-place, SCARA</span></a></li>
+            <li><a href="products.html?ind=aerospace">Aerospace &amp; Defense<span class="nav-dropdown-sub">Flight actuators, radar positioning</span></a></li>
+            <li><a href="products.html?ind=semiconductor">Semiconductor &amp; Cleanroom<span class="nav-dropdown-sub">Wafer handling, vacuum, stainless SRS</span></a></li>
+            <li><a href="products.html?ind=medical">Medical &amp; Packaging<span class="nav-dropdown-sub">Diagnostic scanners, sterile bottling</span></a></li>
+            <li><a href="products.html?ind=heavy">Heavy Engineering<span class="nav-dropdown-sub">Steel mills, continuous casting, conveyors</span></a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="brand.html?b=thk" class="nav-link">
+            THK <i class="fa-solid fa-chevron-down"></i>
+          </a>
+          <ul class="nav-dropdown">
+            <li><a href="lm-guide.html">LM Guides &amp; Rails<span class="nav-dropdown-sub">SHS, HSR, SSR, SRS Caged Ball Series</span></a></li>
+            <li><a href="linear-bush.html">Linear Bushings<span class="nav-dropdown-sub">LM, LM-L, LM-AJ, LM-OP, Flanged LMF/LMK</span></a></li>
+            <li><a href="ball-screws.html">Precision Ball Screws<span class="nav-dropdown-sub">Ground JIS C3/C5 BNK/BIF &amp; Rolled BTK/MTF</span></a></li>
+            <li><a href="cam-followers.html">Cam &amp; Roller Followers<span class="nav-dropdown-sub">CF, CFH High-Rigidity, CF-AB Eccentric</span></a></li>
+            <li><a href="cross-roller.html">Cross Roller Rings<span class="nav-dropdown-sub">RB, RE, RU Integrated High-Rigidity Rings</span></a></li>
+            <li><a href="brand.html?b=thk">Full THK Product Catalog<span class="nav-dropdown-sub">CAD Models &amp; Technical Specifications</span></a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="brand.html?b=tsubaki" class="nav-link">
+            Tsubaki <i class="fa-solid fa-chevron-down"></i>
+          </a>
+          <ul class="nav-dropdown">
+            <li><a href="brand.html?b=tsubaki">Drive &amp; Roller Chains<span class="nav-dropdown-sub">ANSI/BS Standard &amp; Lambda Lube-Free</span></a></li>
+            <li><a href="brand.html?b=tsubaki">Cable Carriers &amp; Cableveyors<span class="nav-dropdown-sub">Plastic &amp; Steel Cable Protection Tracks</span></a></li>
+            <li><a href="brand.html?b=tsubaki">Power Cylinders &amp; Actuators<span class="nav-dropdown-sub">Linipower &amp; Multi-Cylinder Screw Jacks</span></a></li>
+            <li><a href="brand.html?b=tsubaki">Full Tsubaki Catalog<span class="nav-dropdown-sub">CAD Models &amp; Technical Specifications</span></a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="brand.html?b=oiles" class="nav-link">
+            Oiles <i class="fa-solid fa-chevron-down"></i>
+          </a>
+          <ul class="nav-dropdown">
+            <li><a href="brand.html?b=oiles">Oiles 500SP Bronze Bearings<span class="nav-dropdown-sub">Solid Bronze with Graphite Lubricant Plugs</span></a></li>
+            <li><a href="brand.html?b=oiles">Oiles Drymet LF / LFB Bushings<span class="nav-dropdown-sub">PTFE Layered Self-Lubricating Composite</span></a></li>
+            <li><a href="brand.html?b=oiles">Full Oiles Catalog<span class="nav-dropdown-sub">CAD Models &amp; Technical Specifications</span></a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="brand.html?b=ina" class="nav-link">
+            INA <i class="fa-solid fa-chevron-down"></i>
+          </a>
+          <ul class="nav-dropdown">
+            <li><a href="brand.html?b=ina">Needle Roller Bearings<span class="nav-dropdown-sub">Drawn Cup HK/BK &amp; Machined Ring NK/RNA</span></a></li>
+            <li><a href="brand.html?b=ina">Monorail Guidance Systems<span class="nav-dropdown-sub">KUVE, KUSE &amp; Roller Guideways RUE</span></a></li>
+            <li><a href="brand.html?b=ina">Full INA Catalog<span class="nav-dropdown-sub">CAD Models &amp; Technical Specifications</span></a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="brand.html?b=zimmer" class="nav-link">
+            Zimmer <i class="fa-solid fa-chevron-down"></i>
+          </a>
+          <ul class="nav-dropdown">
+            <li><a href="brand.html?b=zimmer">Pneumatic Rail Clamps &amp; Brakes<span class="nav-dropdown-sub">MBPS, UBPS, LBHS Safety Holding Elements</span></a></li>
+            <li><a href="brand.html?b=zimmer">Manual Clamping Elements<span class="nav-dropdown-sub">HK, MK Series with Fast Locking Lever</span></a></li>
+            <li><a href="brand.html?b=zimmer">Full Zimmer Catalog<span class="nav-dropdown-sub">CAD Models &amp; Technical Specifications</span></a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="brand.html?b=fag" class="nav-link">
+            FAG <i class="fa-solid fa-chevron-down"></i>
+          </a>
+          <ul class="nav-dropdown">
+            <li><a href="brand.html?b=fag">Deep Groove Ball Bearings<span class="nav-dropdown-sub">Generation C 6000, 6200, 6300 Series</span></a></li>
+            <li><a href="brand.html?b=fag">Precision Spindle Bearings<span class="nav-dropdown-sub">B7000 High-Speed Ceramic Hybrid Sets</span></a></li>
+            <li><a href="brand.html?b=fag">Full FAG Catalog<span class="nav-dropdown-sub">CAD Models &amp; Technical Specifications</span></a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="products.html" class="nav-link">
+            Products <i class="fa-solid fa-chevron-down"></i>
+          </a>
+          <ul class="nav-dropdown">
+            <li><a href="products.html">Brand Directory<span class="nav-dropdown-sub">All 6 Authorized Brands</span></a></li>
+            <li><a href="catalogues.html">Download Catalogues<span class="nav-dropdown-sub">Master Engineering PDF Handbooks</span></a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item"><a href="catalogues.html" class="nav-link active">Catalogues</a></li>
+        <li class="nav-item"><a href="contact-us.html" class="nav-link">Branch Hubs</a></li>
+        <li class="nav-item"><a href="about-us.html" class="nav-link">About Rollmann</a></li>
+      </ul>
+
+      <div class="nav-ticker">
+        <i class="fa-solid fa-award"></i> Official Factory Catalogues &bull; Direct PDF Downloads
+      </div>
+    </div>
+  </nav>
+
+  <main class="product-detail-container">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>&rsaquo;</span>
+        <a href="products.html">Products</a>
+        <span>&rsaquo;</span>
+        <span>Download Catalogues</span>
+      </div>
+
+      <div class="product-header-block">
+        <div>
+          <span class="badge-blue">TECHNICAL DOCUMENTATION &amp; SPECIFICATIONS</span>
+          <h1 class="product-heading-title" style="margin-top:4px;">DOWNLOAD CATALOGUES</h1>
+          <p class="product-heading-sub">
+            Access and download complete manufacturer engineering handbooks, calculation formulas, dimension tables, and tolerance charts for all 6 partner brands.
+          </p>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+          <a href="products.html" class="btn-secondary" style="border-color:var(--gray-300);">
+            <i class="fa-solid fa-grid-2"></i> Browse Brand Directory
+          </a>
+          <button type="button" class="btn-whatsapp-ask" data-context="Master Catalogues Request" style="width:auto; padding:10px 18px;">
+            <i class="fa-brands fa-whatsapp"></i> Request Print Copy on WhatsApp
+          </button>
+        </div>
+      </div>
+
+      <div class="brand-directory-grid" style="margin-top:28px;">
+        <div class="brand-dir-card">
+          <div class="brand-logo-container">
+            <img src="images/brands/thk.svg" alt="THK Japan" loading="lazy" />
+          </div>
+          <div class="brand-badges-row">
+            <span class="brand-dir-badge badge-auth">Authorized Stockist</span>
+            <span class="brand-dir-badge badge-loc">PDF Edition</span>
+          </div>
+          <h3 class="brand-dir-title">THK Linear Motion Master Catalog</h3>
+          <p class="brand-dir-desc">Comprehensive general catalog covering LM Guides, Linear Bushings, Precision Ball Screws, Cam Followers, and Cross Roller Rings.</p>
+          <div class="brand-dir-actions">
+            <a href="downloads/thk/THK_Linear_Motion_General_Catalog.pdf" class="btn-primary btn-download-cat" data-brand="THK" data-file="downloads/thk/THK_Linear_Motion_General_Catalog.pdf" style="justify-content:center;">
+              <i class="fa-solid fa-file-arrow-down"></i> Download THK Catalogue
+            </a>
+            <button type="button" class="btn-whatsapp-ask" data-wa-brand="THK" data-context="THK Master Catalog PDF"><i class="fa-brands fa-whatsapp"></i> Inquire via WhatsApp</button>
+          </div>
+        </div>
+
+        <div class="brand-dir-card">
+          <div class="brand-logo-container">
+            <img src="images/brands/tsubaki.svg" alt="Tsubaki" loading="lazy" />
+          </div>
+          <div class="brand-badges-row">
+            <span class="brand-dir-badge badge-auth">Authorized Stockist</span>
+            <span class="brand-dir-badge badge-loc">PDF Edition</span>
+          </div>
+          <h3 class="brand-dir-title">Tsubaki Power Transmission Catalog</h3>
+          <p class="brand-dir-desc">Complete handbook for ANSI/BS drive chains, lube-free Lambda chains, Cableveyor cable management, and Linipower cylinders.</p>
+          <div class="brand-dir-actions">
+            <a href="downloads/tsubaki/Tsubaki_General_Catalog.pdf" class="btn-primary btn-download-cat" data-brand="Tsubaki" data-file="downloads/tsubaki/Tsubaki_General_Catalog.pdf" style="justify-content:center;">
+              <i class="fa-solid fa-file-arrow-down"></i> Download Tsubaki Catalogue
+            </a>
+            <button type="button" class="btn-whatsapp-ask" data-wa-brand="Tsubaki" data-context="Tsubaki Master Catalog PDF"><i class="fa-brands fa-whatsapp"></i> Inquire via WhatsApp</button>
+          </div>
+        </div>
+
+        <div class="brand-dir-card">
+          <div class="brand-logo-container">
+            <img src="images/brands/oiles.svg" alt="Oiles" loading="lazy" />
+          </div>
+          <div class="brand-badges-row">
+            <span class="brand-dir-badge badge-auth">Authorized Stockist</span>
+            <span class="brand-dir-badge badge-loc">PDF Edition</span>
+          </div>
+          <h3 class="brand-dir-title">Oiles Self-Lubricating Bearings Catalog</h3>
+          <p class="brand-dir-desc">Engineering manual for Oiles 500SP solid bronze graphite plugged bushings, Drymet composite layers, and wear slide plates.</p>
+          <div class="brand-dir-actions">
+            <a href="downloads/oiles/Oiles_Self_Lubricating_Bearings_Catalog.pdf" class="btn-primary btn-download-cat" data-brand="Oiles" data-file="downloads/oiles/Oiles_Self_Lubricating_Bearings_Catalog.pdf" style="justify-content:center;">
+              <i class="fa-solid fa-file-arrow-down"></i> Download Oiles Catalogue
+            </a>
+            <button type="button" class="btn-whatsapp-ask" data-wa-brand="Oiles" data-context="Oiles Master Catalog PDF"><i class="fa-brands fa-whatsapp"></i> Inquire via WhatsApp</button>
+          </div>
+        </div>
+
+        <div class="brand-dir-card">
+          <div class="brand-logo-container">
+            <img src="images/brands/zimmer.svg" alt="Zimmer Group" loading="lazy" />
+          </div>
+          <div class="brand-badges-row">
+            <span class="brand-dir-badge badge-auth">Authorized Stockist</span>
+            <span class="brand-dir-badge badge-loc">PDF Edition</span>
+          </div>
+          <h3 class="brand-dir-title">Zimmer Clamping &amp; Braking Elements</h3>
+          <p class="brand-dir-desc">Technical sizing catalog for pneumatic MBPS rail brakes, manual HK locking clamps, and industrial Powerstop shock absorbers.</p>
+          <div class="brand-dir-actions">
+            <a href="downloads/zimmer/Zimmer_Clamping_and_Braking_Elements_Catalog.pdf" class="btn-primary btn-download-cat" data-brand="Zimmer" data-file="downloads/zimmer/Zimmer_Clamping_and_Braking_Elements_Catalog.pdf" style="justify-content:center;">
+              <i class="fa-solid fa-file-arrow-down"></i> Download Zimmer Catalogue
+            </a>
+            <button type="button" class="btn-whatsapp-ask" data-wa-brand="Zimmer" data-context="Zimmer Master Catalog PDF"><i class="fa-brands fa-whatsapp"></i> Inquire via WhatsApp</button>
+          </div>
+        </div>
+
+        <div class="brand-dir-card">
+          <div class="brand-logo-container">
+            <img src="images/brands/ina.svg" alt="INA Schaeffler" loading="lazy" />
+          </div>
+          <div class="brand-badges-row">
+            <span class="brand-dir-badge badge-auth">Authorized Stockist</span>
+            <span class="brand-dir-badge badge-loc">PDF Edition</span>
+          </div>
+          <h3 class="brand-dir-title">INA Needle Bearings &amp; Guideways Catalog</h3>
+          <p class="brand-dir-desc">Schaeffler technical guide for drawn cup and machined needle roller bearings, KUVE linear monorail guideways, and track rollers.</p>
+          <div class="brand-dir-actions">
+            <a href="downloads/ina/INA_Needle_Roller_Bearings_Catalog.pdf" class="btn-primary btn-download-cat" data-brand="INA" data-file="downloads/ina/INA_Needle_Roller_Bearings_Catalog.pdf" style="justify-content:center;">
+              <i class="fa-solid fa-file-arrow-down"></i> Download INA Catalogue
+            </a>
+            <button type="button" class="btn-whatsapp-ask" data-wa-brand="INA" data-context="INA Master Catalog PDF"><i class="fa-brands fa-whatsapp"></i> Inquire via WhatsApp</button>
+          </div>
+        </div>
+
+        <div class="brand-dir-card">
+          <div class="brand-logo-container">
+            <img src="images/brands/fag.svg" alt="FAG Schaeffler" loading="lazy" />
+          </div>
+          <div class="brand-badges-row">
+            <span class="brand-dir-badge badge-auth">Authorized Stockist</span>
+            <span class="brand-dir-badge badge-loc">PDF Edition</span>
+          </div>
+          <h3 class="brand-dir-title">FAG Rolling Bearings Master Catalog</h3>
+          <p class="brand-dir-desc">Engineering reference for Generation C deep groove ball bearings, high-speed ceramic hybrid spindle sets, and spherical rollers.</p>
+          <div class="brand-dir-actions">
+            <a href="downloads/fag/FAG_Rolling_Bearings_Master_Catalog.pdf" class="btn-primary btn-download-cat" data-brand="FAG" data-file="downloads/fag/FAG_Rolling_Bearings_Master_Catalog.pdf" style="justify-content:center;">
+              <i class="fa-solid fa-file-arrow-down"></i> Download FAG Catalogue
+            </a>
+            <button type="button" class="btn-whatsapp-ask" data-wa-brand="FAG" data-context="FAG Master Catalog PDF"><i class="fa-brands fa-whatsapp"></i> Inquire via WhatsApp</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-top-grid">
+      <div>
+        <div class="footer-logo-badge">
+          <img src="images/rollmann_logo_white_bg.png" alt="Rollmann Trading Company" style="height:36px; width:auto; display:block;">
+        </div>
+        <p class="footer-brand-desc">
+          Rollmann Trading Company is a pioneer in linear motion technology, supplying machine tool builders, automation integrators, aerospace, robotics, and medical device manufacturers with genuine THK, Tsubaki, Oiles, Zimmer, INA, and FAG components since 1985.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="footer-col-head">Authorized Brands</h4>
+        <ul class="footer-links-list">
+          <li><a href="brand.html?b=thk">THK Japan</a></li>
+          <li><a href="brand.html?b=tsubaki">Tsubaki Japan</a></li>
+          <li><a href="brand.html?b=oiles">Oiles Bearings</a></li>
+          <li><a href="brand.html?b=zimmer">Zimmer Group</a></li>
+          <li><a href="brand.html?b=ina">INA Schaeffler</a></li>
+          <li><a href="brand.html?b=fag">FAG Schaeffler</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-col-head">Engineering Resources</h4>
+        <ul class="footer-links-list">
+          <li><a href="catalogues.html">Download Brand Catalogues</a></li>
+          <li><a href="linear-bush.html">LM20 Configurator</a></li>
+          <li><a href="products.html">Parametric Parts Search</a></li>
+          <li><a href="linear-bush.html#calc">Fatigue Life Calculations</a></li>
+          <li><a href="services.html">Precision Rail Cutting</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-col-head">5 Branch Hubs</h4>
+        <ul class="footer-links-list">
+          <li><a href="contact-us.html">Bengaluru (Head Office)</a></li>
+          <li><a href="contact-us.html">New Delhi Warehouse</a></li>
+          <li><a href="contact-us.html">Pune MIDC Bhosari</a></li>
+          <li><a href="contact-us.html">Ahmedabad Branch</a></li>
+          <li><a href="contact-us.html">Chennai Branch</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-rfq-box">
+          <h4><i class="fa-solid fa-headset" style="color:var(--orange-bright); margin-right:6px;"></i> Technical Desk</h4>
+          <p>Need urgent stock availability, 3D CAD models, or ball screw repair quotes? Contact our sales engineering desk directly.</p>
+          <a href="tel:+918026609630" class="btn-primary" style="width:100%; justify-content:center; padding:9px; font-size:12px;">
+            <i class="fa-solid fa-phone"></i> Call 080 26609630
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom-bar">
+      <div>&copy; 2026 Rollmann Trading Company. All Rights Reserved. Authorized Stockist Network.</div>
+      <div style="display:flex; gap:16px;">
+        <a href="about-us.html">Privacy Policy</a>
+        <a href="about-us.html">Terms of Supply</a>
+        <a href="contact-us.html">ISO Quality Certificate</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="brands-data.js"></script>
+  <script src="whatsapp-config.js"></script>
+  <script src="whatsapp-router.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

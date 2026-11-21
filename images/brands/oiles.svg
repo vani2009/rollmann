@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <rect width="200" height="60" fill="#FFFFFF"/>
+  <rect x="8" y="8" width="184" height="44" rx="4" fill="#005A36"/>
+  <text x="100" y="38" fill="#FFFFFF" font-family="'Open Sans', Arial, sans-serif" font-size="26" font-weight="900" letter-spacing="3" text-anchor="middle">OILES</text>
+  <text x="100" y="48" fill="#84CC16" font-family="'Open Sans', Arial, sans-serif" font-size="7" font-weight="700" letter-spacing="2" text-anchor="middle">SELF-LUBRICATING BEARINGS</text>
+</svg>

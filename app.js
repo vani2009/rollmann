@@ -1035,15 +1035,18 @@ class RollmannApp {
             </span>
           </td>
           <td>
-            <button type="button" class="btn-table-rfq" onclick="rollmannApp.addToBom('${p.code}', 1, 'Standard specification'); rollmannApp.openBomDrawer();">
-              + BOM
-            </button>
+            <div style="display:flex; gap:6px;">
+              <button type="button" class="btn-table-rfq" onclick="rollmannApp.addToBom('${p.code}', 1, 'Standard specification'); rollmannApp.openBomDrawer();">
+                + BOM
+              </button>
+              <button type="button" class="btn-table-rfq btn-whatsapp-ask" data-wa-brand="${p.brand}" data-wa-part="${p.code}" data-wa-qty="1" style="background:#25D366; color:#fff; border-color:#25D366; padding:4px 8px;" title="Inquire on WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+              </button>
+            </div>
           </td>
         </tr>
       `).join('');
     };
-
-    renderCatalog(ROLLMANN_PARTS_DB);
 
     const brandFilter = document.getElementById('catalogBrandFilter');
     const catFilter = document.getElementById('catalogCategoryFilter');
@@ -1051,6 +1054,18 @@ class RollmannApp {
     const boreMinFilter = document.getElementById('catalogBoreMin');
     const boreMaxFilter = document.getElementById('catalogBoreMax');
     const loadMinFilter = document.getElementById('catalogLoadMin');
+
+    if (brandFilter) {
+      const existingVals = Array.from(brandFilter.options).map(o => o.value);
+      ['THK', 'Tsubaki', 'Oiles', 'Zimmer', 'INA', 'FAG'].forEach(b => {
+        if (!existingVals.includes(b)) {
+          const opt = document.createElement('option');
+          opt.value = b;
+          opt.textContent = b;
+          brandFilter.appendChild(opt);
+        }
+      });
+    }
 
     const applyFilter = () => {
       const bVal = brandFilter ? brandFilter.value : 'all';
@@ -1061,9 +1076,9 @@ class RollmannApp {
       const lMin = loadMinFilter && loadMinFilter.value ? parseFloat(loadMinFilter.value) : 0;
 
       const filtered = ROLLMANN_PARTS_DB.filter(p => {
-        const matchesBrand = (bVal === 'all' || p.brand.toLowerCase() === bVal.toLowerCase());
+        const matchesBrand = (bVal === 'all' || p.brand.toLowerCase() === bVal.toLowerCase() || (bVal.toLowerCase() === 'ina' && p.brand.toLowerCase().includes('ina')) || (bVal.toLowerCase() === 'fag' && p.brand.toLowerCase().includes('fag')));
         const matchesCat = (cVal === 'all' || p.category.toLowerCase().includes(cVal.toLowerCase()));
-        const matchesSearch = (!sVal || p.code.toLowerCase().includes(sVal) || p.category.toLowerCase().includes(sVal) || p.desc.toLowerCase().includes(sVal));
+        const matchesSearch = (!sVal || p.code.toLowerCase().includes(sVal) || p.category.toLowerCase().includes(sVal) || p.desc.toLowerCase().includes(sVal) || p.brand.toLowerCase().includes(sVal));
         const matchesBore = !p.dr || (p.dr >= bMin && p.dr <= bMax);
         const matchesLoad = !p.C || (p.C >= lMin);
         return matchesBrand && matchesCat && matchesSearch && matchesBore && matchesLoad;
@@ -1078,6 +1093,30 @@ class RollmannApp {
     if (boreMinFilter) boreMinFilter.addEventListener('input', applyFilter);
     if (boreMaxFilter) boreMaxFilter.addEventListener('input', applyFilter);
     if (loadMinFilter) loadMinFilter.addEventListener('input', applyFilter);
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const brandParam = urlParams.get('brand');
+    const indParam = urlParams.get('ind');
+    const qParam = urlParams.get('q');
+
+    if (brandParam && brandFilter) {
+      for (let i = 0; i < brandFilter.options.length; i++) {
+        if (brandFilter.options[i].value.toLowerCase() === brandParam.toLowerCase()) {
+          brandFilter.selectedIndex = i;
+          break;
+        }
+      }
+    }
+
+    if (indParam && searchFilter) {
+      searchFilter.value = indParam;
+    }
+
+    if (qParam && searchFilter) {
+      searchFilter.value = qParam;
+    }
+
+    applyFilter();
   }
 
   initPartBreakdown() {
@@ -1285,6 +1324,11 @@ class RollmannApp {
 
       if (cadLink) {
         cadLink.href = 'linear-bush.html?model=' + fullCode;
+      }
+      const resWaAskBtn = document.getElementById('resWaAskBtn');
+      if (resWaAskBtn) {
+        resWaAskBtn.setAttribute('data-wa-part', fullCode);
+        resWaAskBtn.setAttribute('data-wa-brand', 'THK');
       }
 
       syncWizardPills();
