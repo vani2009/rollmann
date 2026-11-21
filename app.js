@@ -1081,292 +1081,264 @@ class RollmannApp {
   }
 
   initPartBreakdown() {
-    const seriesInput = document.getElementById('breakdownSeriesInput');
-    const seriesPills = document.querySelectorAll('#seriesQuickPills .wizard-pill');
-    const diaInput = document.getElementById('breakdownDiaInput');
-    const diaPillsContainer = document.getElementById('diaQuickPills');
-    const sealPillsContainer = document.getElementById('sealQuickPills');
+    const shapePills = document.querySelectorAll('#shapeQuickPills .wizard-pill');
+    const diaPills = document.querySelectorAll('#diaQuickPills .wizard-pill');
+    const lenPills = document.querySelectorAll('#lengthQuickPills .wizard-pill');
+    const sealPills = document.querySelectorAll('#sealQuickPills .wizard-pill');
+    const tableRows = document.querySelectorAll('.nomen-table .clickable-row');
 
     const resBrandTag = document.getElementById('resBrandTag');
     const resPartCode = document.getElementById('resPartCode');
     const resPartName = document.getElementById('resPartName');
     const resStockPill = document.getElementById('resStockPill');
+
     const nomToken1 = document.getElementById('nomToken1');
     const nomLbl1 = document.getElementById('nomLbl1');
     const nomToken2 = document.getElementById('nomToken2');
     const nomLbl2 = document.getElementById('nomLbl2');
     const nomToken3 = document.getElementById('nomToken3');
     const nomLbl3 = document.getElementById('nomLbl3');
+    const nomToken4 = document.getElementById('nomToken4');
+    const nomLbl4 = document.getElementById('nomLbl4');
+
     const specDr = document.getElementById('specValDr');
     const specD = document.getElementById('specValD');
+    const specFlange = document.getElementById('specValFlange');
     const specL = document.getElementById('specValL');
     const specC = document.getElementById('specValC');
     const specC0 = document.getElementById('specValC0');
     const specFit = document.getElementById('specValFit');
+    const specHousing = document.getElementById('specValHousing');
+
     const cadLink = document.getElementById('resCadLink');
     const addBomBtn = document.getElementById('resAddBomBtn');
 
-    if (!seriesInput || !resPartCode) return;
+    if (!resPartCode) return;
 
-    const breakdownCatalog = {
+    const bushingDb = {
       LM: {
-        brand: 'THK JAPAN AUTHENTIC',
-        name: 'Precision Cylindrical Linear Bushing',
-        seriesDesc: 'Linear Bushing Series',
-        cadUrl: 'linear-bush.html',
-        diameters: {
-          6: { D: 12, L: 19, C: 206, C0: 265, fit: 'ISO 286 g6 / h6', stock: 'Bengaluru (Immediate)' },
-          8: { D: 15, L: 24, C: 265, C0: 402, fit: 'ISO 286 g6 / h6', stock: 'Bengaluru / Pune (Immediate)' },
-          10: { D: 19, L: 29, C: 372, C0: 549, fit: 'ISO 286 g6 / h6', stock: 'Pune (Immediate)' },
-          12: { D: 21, L: 30, C: 410, C0: 590, fit: 'ISO 286 g6 / h6', stock: 'Bengaluru / Delhi (Immediate)' },
-          16: { D: 28, L: 37, C: 775, C0: 1180, fit: 'ISO 286 g6 / h6', stock: 'Bengaluru / Pune (Immediate)' },
-          20: { D: 32, L: 42, C: 860, C0: 1370, fit: 'ISO 286 g6 / h6', stock: 'Bengaluru / Pune (Immediate)' },
-          25: { D: 40, L: 59, C: 980, C0: 1570, fit: 'ISO 286 g6 / h6', stock: 'Bengaluru / Pune (Immediate)' },
-          30: { D: 45, L: 64, C: 1570, C0: 2740, fit: 'ISO 286 g6 / h6', stock: 'Bengaluru (Immediate)' },
-          40: { D: 60, L: 80, C: 2160, C0: 4020, fit: 'ISO 286 g6 / h6', stock: 'Pune / Delhi (24 Hrs)' },
-          50: { D: 80, L: 100, C: 3820, C0: 7940, fit: 'ISO 286 g6 / h6', stock: 'Bengaluru (24 Hrs)' }
-        },
-        seals: [
-          { key: 'UU', label: 'Double Nitrile Rubber Lip Seals', suffix: 'UU' },
-          { key: 'U', label: 'Single Nitrile Rubber Lip Seal', suffix: 'U' },
-          { key: 'None', label: 'Standard Open Ends (No Rubber Seals)', suffix: '' },
-          { key: 'AJ', label: 'Clearance-Adjustable Slit Outer Cylinder', suffix: '-AJ' },
-          { key: 'OP', label: 'Open Type (60 Deg Cutout for Continuous Shaft)', suffix: '-OP' },
-          { key: 'GA', label: 'High-Temp Metal Retainer (up to 120 Deg C)', suffix: 'GA' }
-        ]
+        name: 'No Flange Cylindrical Linear Bushing',
+        shapeLbl: 'No Flange (Cylindrical)',
+        sizes: {
+          6: { D: 12, flange: 'No Flange (Cylindrical)', normalL: 19, smallL: 15, longL: 35, normalC: 206, normalC0: 265, longC: 323, longC0: 530, stock: 'Bengaluru (Immediate)' },
+          8: { D: 15, flange: 'No Flange (Cylindrical)', normalL: 24, smallL: 17, longL: 45, normalC: 265, normalC0: 402, longC: 431, longC0: 784, stock: 'Bengaluru / Pune (Immediate)' },
+          10: { D: 19, flange: 'No Flange (Cylindrical)', normalL: 29, smallL: 22, longL: 55, normalC: 372, normalC0: 549, longC: 588, longC0: 1100, stock: 'Pune (Immediate)' },
+          12: { D: 21, flange: 'No Flange (Cylindrical)', normalL: 30, smallL: 24, longL: 57, normalC: 410, normalC0: 590, longC: 657, longC0: 1200, stock: 'Bengaluru / Delhi (Immediate)' },
+          16: { D: 28, flange: 'No Flange (Cylindrical)', normalL: 37, smallL: 28, longL: 70, normalC: 775, normalC0: 1180, longC: 1230, longC0: 2350, stock: 'Bengaluru / Pune (Immediate)' },
+          20: { D: 32, flange: 'No Flange (Cylindrical)', normalL: 42, smallL: 30, longL: 80, normalC: 860, normalC0: 1370, longC: 1400, longC0: 2740, stock: 'Bengaluru / Pune (Immediate)' },
+          25: { D: 40, flange: 'No Flange (Cylindrical)', normalL: 59, smallL: 40, longL: 112, normalC: 980, normalC0: 1570, longC: 1560, longC0: 3140, stock: 'Bengaluru / Pune (Immediate)' },
+          30: { D: 45, flange: 'No Flange (Cylindrical)', normalL: 64, smallL: 45, longL: 123, normalC: 1570, normalC0: 2740, longC: 2490, longC0: 5490, stock: 'Pune / Delhi (Immediate)' }
+        }
       },
-      HSR: {
-        brand: 'THK JAPAN AUTHENTIC',
-        name: 'Heavy-Load 4-Way Equal Load LM Guide',
-        seriesDesc: 'Heavy Load LM Guide Series',
-        cadUrl: 'lm-guide.html',
-        diameters: {
-          15: { D: 47, L: 60, C: 14300, C0: 25100, fit: 'JIS H/P Precision', stock: 'Bengaluru / Pune (Immediate)' },
-          20: { D: 63, L: 76, C: 21100, C0: 36700, fit: 'JIS H/P Precision', stock: 'Bengaluru / Pune (Immediate)' },
-          25: { D: 70, L: 88, C: 35200, C0: 59700, fit: 'JIS H/P Precision', stock: 'Bengaluru / Pune (Immediate)' },
-          30: { D: 90, L: 106, C: 53300, C0: 89300, fit: 'JIS H/P Precision', stock: 'Pune / Delhi (Immediate)' },
-          35: { D: 100, L: 122, C: 71200, C0: 119000, fit: 'JIS H/P Precision', stock: 'Bengaluru (Immediate)' }
-        },
-        seals: [
-          { key: 'A', label: 'Flange Type Block (Top/Bottom Tapped)', suffix: 'A' },
-          { key: 'B', label: 'Flange Type Block (Through Mounting Holes)', suffix: 'B' },
-          { key: 'R', label: 'Square Compact Block (Narrow Width Tapped)', suffix: 'R' },
-          { key: 'UU', label: 'Standard End Dust Seals', suffix: 'UU' },
-          { key: 'SS', label: 'Double End Seals + Side Scrapers', suffix: 'SS' }
-        ]
+      LMF: {
+        name: 'Round Flange Precision Linear Bushing',
+        shapeLbl: 'Round Flange (JIS Mounting)',
+        sizes: {
+          6: { D: 12, flange: 'Round Flange ØD1=28 mm', normalL: 19, smallL: 15, longL: 35, normalC: 206, normalC0: 265, longC: 323, longC0: 530, stock: 'Bengaluru (Immediate)' },
+          8: { D: 15, flange: 'Round Flange ØD1=32 mm', normalL: 24, smallL: 17, longL: 45, normalC: 265, normalC0: 402, longC: 431, longC0: 784, stock: 'Bengaluru / Pune (Immediate)' },
+          10: { D: 19, flange: 'Round Flange ØD1=40 mm', normalL: 29, smallL: 22, longL: 55, normalC: 372, normalC0: 549, longC: 588, longC0: 1100, stock: 'Pune (Immediate)' },
+          12: { D: 21, flange: 'Round Flange ØD1=42 mm', normalL: 30, smallL: 24, longL: 57, normalC: 410, normalC0: 590, longC: 657, longC0: 1200, stock: 'Bengaluru (Immediate)' },
+          16: { D: 28, flange: 'Round Flange ØD1=48 mm', normalL: 37, smallL: 28, longL: 70, normalC: 775, normalC0: 1180, longC: 1230, longC0: 2350, stock: 'Bengaluru / Pune (Immediate)' },
+          20: { D: 32, flange: 'Round Flange ØD1=54 mm', normalL: 42, smallL: 30, longL: 80, normalC: 860, normalC0: 1370, longC: 1400, longC0: 2740, stock: 'Bengaluru / Pune (Immediate)' },
+          25: { D: 40, flange: 'Round Flange ØD1=62 mm', normalL: 59, smallL: 40, longL: 112, normalC: 980, normalC0: 1570, longC: 1560, longC0: 3140, stock: 'Pune (Immediate)' },
+          30: { D: 45, flange: 'Round Flange ØD1=74 mm', normalL: 64, smallL: 45, longL: 123, normalC: 1570, normalC0: 2740, longC: 2490, longC0: 5490, stock: 'Bengaluru / Delhi (Immediate)' }
+        }
       },
-      SHS: {
-        brand: 'THK JAPAN AUTHENTIC',
-        name: 'Caged Ball Ultra-Quiet LM Guide',
-        seriesDesc: 'Caged Ball Low-Noise Series',
-        cadUrl: 'lm-guide.html',
-        diameters: {
-          15: { D: 47, L: 64, C: 17200, C0: 27900, fit: 'JIS H/P Precision', stock: 'Bengaluru (Immediate)' },
-          20: { D: 63, L: 79, C: 27500, C0: 44700, fit: 'JIS H/P Precision', stock: 'Bengaluru / Pune (Immediate)' },
-          25: { D: 70, L: 92, C: 41700, C0: 67400, fit: 'JIS H/P Precision', stock: 'Bengaluru / Pune (Immediate)' },
-          30: { D: 90, L: 111, C: 61900, C0: 100000, fit: 'JIS H/P Precision', stock: 'Pune (Immediate)' }
-        },
-        seals: [
-          { key: 'C', label: 'Flange Type Caged Ball Block', suffix: 'C' },
-          { key: 'V', label: 'Square Type Compact Caged Ball Block', suffix: 'V' },
-          { key: 'UU', label: 'Standard End Seals', suffix: 'UU' },
-          { key: 'SS', label: 'End Seals + Laminated Scrapers', suffix: 'SS' }
-        ]
+      LMK: {
+        name: 'Square Flange Precision Linear Bushing',
+        shapeLbl: 'Square Flange (Compact Mounting)',
+        sizes: {
+          6: { D: 12, flange: 'Square Flange 22 × 22 mm', normalL: 19, smallL: 15, longL: 35, normalC: 206, normalC0: 265, longC: 323, longC0: 530, stock: 'Bengaluru (Immediate)' },
+          8: { D: 15, flange: 'Square Flange 25 × 25 mm', normalL: 24, smallL: 17, longL: 45, normalC: 265, normalC0: 402, longC: 431, longC0: 784, stock: 'Bengaluru / Pune (Immediate)' },
+          10: { D: 19, flange: 'Square Flange 30 × 30 mm', normalL: 29, smallL: 22, longL: 55, normalC: 372, normalC0: 549, longC: 588, longC0: 1100, stock: 'Pune (Immediate)' },
+          12: { D: 21, flange: 'Square Flange 32 × 32 mm', normalL: 30, smallL: 24, longL: 57, normalC: 410, normalC0: 590, longC: 657, longC0: 1200, stock: 'Bengaluru (Immediate)' },
+          16: { D: 28, flange: 'Square Flange 37 × 37 mm', normalL: 37, smallL: 28, longL: 70, normalC: 775, normalC0: 1180, longC: 1230, longC0: 2350, stock: 'Bengaluru / Pune (Immediate)' },
+          20: { D: 32, flange: 'Square Flange 42 × 42 mm', normalL: 42, smallL: 30, longL: 80, normalC: 860, normalC0: 1370, longC: 1400, longC0: 2740, stock: 'Bengaluru / Pune (Immediate)' },
+          25: { D: 40, flange: 'Square Flange 50 × 50 mm', normalL: 59, smallL: 40, longL: 112, normalC: 980, normalC0: 1570, longC: 1560, longC0: 3140, stock: 'Pune (Immediate)' },
+          30: { D: 45, flange: 'Square Flange 58 × 58 mm', normalL: 64, smallL: 45, longL: 123, normalC: 1570, normalC0: 2740, longC: 2490, longC0: 5490, stock: 'Bengaluru / Delhi (Immediate)' }
+        }
       },
-      BNK: {
-        brand: 'THK JAPAN AUTHENTIC',
-        name: 'Precision Ground High-Accuracy Ball Screw',
-        seriesDesc: 'Ground Ball Screw Series',
-        cadUrl: 'ball-screws.html',
-        diameters: {
-          15: { D: 48, L: 500, C: 7400, C0: 14700, fit: 'JIS C3/C5 Preloaded', stock: 'Bengaluru Workshop' },
-          20: { D: 58, L: 800, C: 11800, C0: 25500, fit: 'JIS C3/C5 Preloaded', stock: 'Bengaluru / Pune Workshop' },
-          25: { D: 70, L: 1000, C: 16700, C0: 38200, fit: 'JIS C3/C5 Preloaded', stock: 'Pune Workshop' }
-        },
-        seals: [
-          { key: 'RR', label: 'Double Brush Labyrinth Seals', suffix: '-RR' },
-          { key: 'ZZ', label: 'End Deflector High-Speed Seals', suffix: '-ZZ' }
-        ]
-      },
-      CF: {
-        brand: 'THK JAPAN AUTHENTIC',
-        name: 'Precision Cam Follower (Stud Type)',
-        seriesDesc: 'Stud-Type Cam Follower',
-        cadUrl: 'products.html?category=Cam%20Follower',
-        diameters: {
-          6: { D: 16, L: 28, C: 3590, C0: 3650, fit: 'JIS Hex Stud M6x1.0', stock: 'Bengaluru / Pune (Immediate)' },
-          10: { D: 22, L: 36, C: 5390, C0: 6860, fit: 'JIS Hex Stud M10x1.25', stock: 'Bengaluru / Pune (Immediate)' },
-          12: { D: 30, L: 40, C: 7850, C0: 9790, fit: 'JIS Hex Stud M12x1.5', stock: 'Bengaluru / Pune (Immediate)' },
-          16: { D: 35, L: 52, C: 12000, C0: 18300, fit: 'JIS Hex Stud M16x1.5', stock: 'Bengaluru / Pune (Immediate)' },
-          20: { D: 52, L: 66, C: 24700, C0: 37200, fit: 'JIS Hex Stud M20x1.5', stock: 'Pune / Delhi (Immediate)' }
-        },
-        seals: [
-          { key: 'UU', label: 'Synthetic Rubber Contact Seals Both Sides', suffix: 'UU' },
-          { key: 'B', label: 'Hexagonal Socket Stud Head', suffix: '-B' },
-          { key: 'None', label: 'Standard Cage-Guided Open Type', suffix: '' }
-        ]
-      },
-      RB: {
-        brand: 'THK JAPAN AUTHENTIC',
-        name: 'Cross-Roller Ring (Separable Outer Ring)',
-        seriesDesc: 'Cross-Roller Ring Series',
-        cadUrl: 'products.html?category=Cross%20Roller',
-        diameters: {
-          20: { D: 36, L: 8, C: 2900, C0: 2700, fit: 'JIS Precision Rotary Fit', stock: 'Bengaluru (Immediate)' },
-          30: { D: 55, L: 12, C: 7350, C0: 8350, fit: 'JIS Precision Rotary Fit', stock: 'Bengaluru / Pune (Immediate)' },
-          50: { D: 80, L: 13, C: 14700, C0: 20600, fit: 'JIS Precision Rotary Fit', stock: 'Bengaluru / Delhi (Immediate)' }
-        },
-        seals: [
-          { key: 'UU', label: 'Rubber Seals on Both Sides', suffix: 'UU' },
-          { key: 'Open', label: 'Open Type / Low Rotational Torque', suffix: '' }
-        ]
-      },
-      SPB: {
-        brand: 'OILES JAPAN',
-        name: 'Oiles 500SP Self-Lubricating Bushing',
-        seriesDesc: 'Solid Lubricant Embedded Bronze',
-        cadUrl: 'products.html?brand=Oiles',
-        diameters: {
-          20: { D: 28, L: 30, C: 49000, C0: 98000, fit: 'Shaft d8 / Housing H7', stock: 'Bengaluru / Pune (Immediate)' },
-          25: { D: 33, L: 35, C: 61000, C0: 122000, fit: 'Shaft d8 / Housing H7', stock: 'Bengaluru / Pune (Immediate)' },
-          30: { D: 38, L: 40, C: 75000, C0: 150000, fit: 'Shaft d8 / Housing H7', stock: 'Pune / Delhi (Immediate)' }
-        },
-        seals: [
-          { key: 'Bronze', label: 'High-Strength Brass with Graphite Plugs', suffix: '' }
-        ]
+      LMH: {
+        name: 'Oval Two-Cut Flange Linear Bushing',
+        shapeLbl: 'Oval / Two-Cut Flange (Narrow Space)',
+        sizes: {
+          6: { D: 12, flange: 'Oval Flange 18 × 28 mm', normalL: 19, smallL: 15, longL: 35, normalC: 206, normalC0: 265, longC: 323, longC0: 530, stock: 'Bengaluru (Immediate)' },
+          8: { D: 15, flange: 'Oval Flange 21 × 32 mm', normalL: 24, smallL: 17, longL: 45, normalC: 265, normalC0: 402, longC: 431, longC0: 784, stock: 'Bengaluru / Pune (Immediate)' },
+          10: { D: 19, flange: 'Oval Flange 25 × 40 mm', normalL: 29, smallL: 22, longL: 55, normalC: 372, normalC0: 549, longC: 588, longC0: 1100, stock: 'Pune (Immediate)' },
+          12: { D: 21, flange: 'Oval Flange 27 × 42 mm', normalL: 30, smallL: 24, longL: 57, normalC: 410, normalC0: 590, longC: 657, longC0: 1200, stock: 'Bengaluru (Immediate)' },
+          16: { D: 28, flange: 'Oval Flange 32 × 48 mm', normalL: 37, smallL: 28, longL: 70, normalC: 775, normalC0: 1180, longC: 1230, longC0: 2350, stock: 'Bengaluru / Pune (Immediate)' },
+          20: { D: 32, flange: 'Oval Flange 38 × 54 mm', normalL: 42, smallL: 30, longL: 80, normalC: 860, normalC0: 1370, longC: 1400, longC0: 2740, stock: 'Bengaluru / Pune (Immediate)' },
+          25: { D: 40, flange: 'Oval Flange 46 × 62 mm', normalL: 59, smallL: 40, longL: 112, normalC: 980, normalC0: 1570, longC: 1560, longC0: 3140, stock: 'Pune (Immediate)' },
+          30: { D: 45, flange: 'Oval Flange 54 × 74 mm', normalL: 64, smallL: 45, longL: 123, normalC: 1570, normalC0: 2740, longC: 2490, longC0: 5490, stock: 'Bengaluru / Delhi (Immediate)' }
+        }
       }
     };
 
     let curSeries = 'LM';
     let curDia = 20;
+    let curLen = 'normal';
     let curSeal = 'UU';
 
-    const renderDiaPills = () => {
-      const seriesData = breakdownCatalog[curSeries] || breakdownCatalog.LM;
-      const diaKeys = Object.keys(seriesData.diameters).map(Number);
-      if (!diaKeys.includes(Number(curDia))) {
-        curDia = diaKeys[Math.floor(diaKeys.length / 2)] || diaKeys[0];
-        diaInput.value = curDia;
-      }
-      diaPillsContainer.innerHTML = diaKeys.map(d => '<button type="button" class="wizard-pill ' + (Number(d) === Number(curDia) ? 'active' : '') + '" data-dia="' + d + '">&Oslash; ' + d + ' mm</button>').join('');
+    const updateDecoder = () => {
+      const seriesObj = bushingDb[curSeries] || bushingDb.LM;
+      const sizeObj = seriesObj.sizes[curDia] || seriesObj.sizes[20];
 
-      diaPillsContainer.querySelectorAll('.wizard-pill').forEach(btn => {
-        btn.addEventListener('click', () => {
-          diaPillsContainer.querySelectorAll('.wizard-pill').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          curDia = Number(btn.getAttribute('data-dia'));
-          diaInput.value = curDia;
-          updateOutput();
-        });
-      });
-    };
+      let lenCode = '';
+      let lenName = 'Normal Length';
+      let lenToken = 'Standard';
+      let lengthVal = sizeObj.normalL;
+      let dynC = sizeObj.normalC;
+      let statC0 = sizeObj.normalC0;
 
-    const renderSealPills = () => {
-      const seriesData = breakdownCatalog[curSeries] || breakdownCatalog.LM;
-      const seals = seriesData.seals;
-      const validKeys = seals.map(s => s.key);
-      if (!validKeys.includes(curSeal)) {
-        curSeal = seals[0].key;
-      }
-      sealPillsContainer.innerHTML = seals.map(s => '<button type="button" class="wizard-pill ' + (s.key === curSeal ? 'active' : '') + '" data-seal="' + s.key + '">' + s.key + ' (' + s.label.split(' ')[0] + ')</button>').join('');
-
-      sealPillsContainer.querySelectorAll('.wizard-pill').forEach(btn => {
-        btn.addEventListener('click', () => {
-          sealPillsContainer.querySelectorAll('.wizard-pill').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          curSeal = btn.getAttribute('data-seal');
-          updateOutput();
-        });
-      });
-    };
-
-    const updateOutput = () => {
-      const seriesData = breakdownCatalog[curSeries] || breakdownCatalog.LM;
-      const diaData = seriesData.diameters[curDia] || Object.values(seriesData.diameters)[0];
-      const sealData = seriesData.seals.find(s => s.key === curSeal) || seriesData.seals[0];
-
-      let fullCode = curSeries + curDia + sealData.suffix;
-      if (curSeries === 'BNK') {
-        fullCode = curSeries + curDia + '20' + sealData.suffix;
+      if (curLen === 'long') {
+        lenCode = 'L';
+        lenName = 'Long (Double Length)';
+        lenToken = 'L (Long)';
+        lengthVal = sizeObj.longL;
+        dynC = sizeObj.longC;
+        statC0 = sizeObj.longC0;
+      } else if (curLen === 'small') {
+        lenCode = 'S';
+        lenName = 'Small (Compact Length)';
+        lenToken = 'S (Small)';
+        lengthVal = sizeObj.smallL;
       }
 
-      resBrandTag.textContent = seriesData.brand;
+      let sealCode = '';
+      let sealName = 'No Seal (Open Ends)';
+      let sealToken = 'No Seal';
+
+      if (curSeal === 'UU') {
+        sealCode = 'UU';
+        sealName = 'Double Nitrile Rubber Lip Seals';
+        sealToken = 'UU';
+      } else if (curSeal === 'cage') {
+        sealCode = 'GA';
+        sealName = 'Steel Cage (High-Temp Metal Retainer)';
+        sealToken = 'GA (Metal)';
+      }
+
+      const fullCode = curSeries + curDia + lenCode + sealCode;
+
+      resBrandTag.textContent = 'THK JAPAN AUTHENTIC';
       resPartCode.textContent = fullCode;
-      resPartName.textContent = seriesData.name;
-      resStockPill.innerHTML = '<i class="fa-solid fa-circle-check"></i> In Stock (' + diaData.stock + ')';
+      resPartName.textContent = seriesObj.name + (curLen === 'long' ? ' (Double Length)' : '');
+      resStockPill.innerHTML = '<i class="fa-solid fa-circle-check"></i> In Stock (' + sizeObj.stock + ')';
 
       nomToken1.textContent = curSeries;
-      nomLbl1.textContent = seriesData.seriesDesc;
+      nomLbl1.textContent = seriesObj.shapeLbl;
 
       nomToken2.textContent = curDia + 'mm';
-      nomLbl2.textContent = curDia + 'mm Bore / Shaft Dimension';
+      nomLbl2.textContent = curDia + 'mm Shaft Diameter';
 
-      nomToken3.textContent = sealData.key;
-      nomLbl3.textContent = sealData.label;
+      nomToken3.textContent = lenToken;
+      nomLbl3.textContent = lenName;
+
+      nomToken4.textContent = sealToken;
+      nomLbl4.textContent = sealName;
 
       specDr.textContent = curDia + ' mm';
-      specD.textContent = diaData.D + ' mm';
-      specL.textContent = diaData.L + ' mm';
-      specC.textContent = diaData.C.toLocaleString() + ' N';
-      specC0.textContent = diaData.C0.toLocaleString() + ' N';
-      specFit.textContent = diaData.fit;
+      specD.textContent = sizeObj.D + ' mm';
+      specFlange.textContent = sizeObj.flange;
+      specL.textContent = lengthVal + ' mm';
+      specC.textContent = dynC.toLocaleString() + ' N';
+      specC0.textContent = statC0.toLocaleString() + ' N';
+      specFit.textContent = 'ISO 286 g6 / h6';
+      specHousing.textContent = 'ISO 286 H7';
 
       if (cadLink) {
-        cadLink.href = seriesData.cadUrl;
+        cadLink.href = 'linear-bush.html?model=' + fullCode;
       }
     };
 
-    seriesPills.forEach(btn => {
+    shapePills.forEach(btn => {
       btn.addEventListener('click', () => {
-        seriesPills.forEach(b => b.classList.remove('active'));
+        shapePills.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         curSeries = btn.getAttribute('data-series');
-        seriesInput.value = curSeries;
-        renderDiaPills();
-        renderSealPills();
-        updateOutput();
+        updateDecoder();
       });
     });
 
-    seriesInput.addEventListener('input', () => {
-      const typed = seriesInput.value.trim().toUpperCase();
-      const matched = Object.keys(breakdownCatalog).find(k => k === typed || typed.startsWith(k));
-      if (matched) {
-        curSeries = matched;
-        seriesPills.forEach(b => {
-          if (b.getAttribute('data-series') === matched) b.classList.add('active');
-          else b.classList.remove('active');
-        });
-        renderDiaPills();
-        renderSealPills();
-        updateOutput();
-      }
+    diaPills.forEach(btn => {
+      btn.addEventListener('click', () => {
+        diaPills.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        curDia = Number(btn.getAttribute('data-dia'));
+        updateDecoder();
+      });
     });
 
-    diaInput.addEventListener('input', () => {
-      const num = parseInt(diaInput.value.trim());
-      const seriesData = breakdownCatalog[curSeries] || breakdownCatalog.LM;
-      if (num && seriesData.diameters[num]) {
-        curDia = num;
-        diaPillsContainer.querySelectorAll('.wizard-pill').forEach(b => {
-          if (Number(b.getAttribute('data-dia')) === num) b.classList.add('active');
-          else b.classList.remove('active');
-        });
-        updateOutput();
-      }
+    lenPills.forEach(btn => {
+      btn.addEventListener('click', () => {
+        lenPills.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        curLen = btn.getAttribute('data-len');
+        updateDecoder();
+      });
+    });
+
+    sealPills.forEach(btn => {
+      btn.addEventListener('click', () => {
+        sealPills.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        curSeal = btn.getAttribute('data-seal');
+        updateDecoder();
+      });
+    });
+
+    tableRows.forEach(row => {
+      row.addEventListener('click', () => {
+        const s = row.getAttribute('data-series');
+        const d = Number(row.getAttribute('data-dia'));
+        const l = row.getAttribute('data-len');
+        const sl = row.getAttribute('data-seal');
+
+        if (s) {
+          curSeries = s;
+          shapePills.forEach(b => {
+            if (b.getAttribute('data-series') === s) b.classList.add('active');
+            else b.classList.remove('active');
+          });
+        }
+
+        if (d) {
+          curDia = d;
+          diaPills.forEach(b => {
+            if (Number(b.getAttribute('data-dia')) === d) b.classList.add('active');
+            else b.classList.remove('active');
+          });
+        }
+
+        if (l) {
+          curLen = l;
+          lenPills.forEach(b => {
+            if (b.getAttribute('data-len') === l) b.classList.add('active');
+            else b.classList.remove('active');
+          });
+        }
+
+        if (sl) {
+          curSeal = sl;
+          sealPills.forEach(b => {
+            if (b.getAttribute('data-seal') === sl) b.classList.add('active');
+            else b.classList.remove('active');
+          });
+        }
+
+        updateDecoder();
+      });
     });
 
     if (addBomBtn) {
       addBomBtn.addEventListener('click', () => {
         const code = resPartCode.textContent.trim();
-        this.addToBom(code, 1, 'Configured via Guided Breakdown Tool');
+        this.addToBom(code, 1, 'Configured via THK Linear Bushing Nomenclature Matrix');
         this.openBomDrawer();
       });
     }
 
-    renderDiaPills();
-    renderSealPills();
-    updateOutput();
+    updateDecoder();
   }
 
 }

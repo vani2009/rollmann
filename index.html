@@ -795,15 +795,15 @@
     </div>
   </section>
 
-  <section class="section-breakdown" id="partBreakdownSection">
+    <section class="section-breakdown" id="partBreakdownSection">
     <div class="container">
       <div class="section-head-bar" style="border-bottom-color:rgba(255,255,255,0.15);">
         <div>
-          <div style="font-size:12px; font-weight:800; text-transform:uppercase; color:var(--rollmann-cyan); letter-spacing:0.06em; margin-bottom:4px;">Interactive Nomenclature Decoder</div>
+          <div style="font-size:12px; font-weight:800; text-transform:uppercase; color:var(--rollmann-cyan); letter-spacing:0.06em; margin-bottom:4px;">THK Linear Bushing Nomenclature System</div>
           <h2 class="section-title" style="color:var(--white);">Part Number Breakdown &amp; <span style="color:var(--rollmann-cyan);">Guided Specifier</span></h2>
         </div>
         <div style="font-size:12.5px; color:var(--gray-300); max-width:480px; text-align:right;">
-          Step-by-step model configurator. Input series, shaft diameter, and sealing to reveal exact JIS specifications and inventory status.
+          Step-by-step model configurator. Select shape, series, shaft diameter, length, and sealing to reveal exact JIS specifications and stock status.
         </div>
       </div>
 
@@ -811,41 +811,63 @@
         <div class="breakdown-wizard-card">
           <div class="wizard-step" id="step1Container">
             <div class="wizard-step-header">
-              <span class="wizard-step-badge">Step 1</span>
-              <span class="wizard-step-title">Enter or Select Component Series</span>
+              <span class="wizard-step-badge">Step 1 &bull; Shape &amp; Series</span>
+              <span class="wizard-step-title">Select Flange Shape / Part Series</span>
             </div>
-            <div class="wizard-input-wrap">
-              <input type="text" id="breakdownSeriesInput" class="wizard-input" placeholder="Type series code (e.g. LM, HSR, BNK, CF)..." value="LM" autocomplete="off">
-            </div>
-            <div class="wizard-pills-row" id="seriesQuickPills">
-              <button type="button" class="wizard-pill active" data-series="LM">LM (Linear Bush)</button>
-              <button type="button" class="wizard-pill" data-series="HSR">HSR (LM Guide)</button>
-              <button type="button" class="wizard-pill" data-series="SHS">SHS (Caged Ball)</button>
-              <button type="button" class="wizard-pill" data-series="BNK">BNK (Ball Screw)</button>
-              <button type="button" class="wizard-pill" data-series="CF">CF (Cam Follower)</button>
-              <button type="button" class="wizard-pill" data-series="RB">RB (Cross Roller)</button>
-              <button type="button" class="wizard-pill" data-series="SPB">SPB (Oiles Bronze)</button>
+            <div class="wizard-pills-row" id="shapeQuickPills">
+              <button type="button" class="wizard-pill active" data-series="LM" data-shape="No Flange">
+                <i class="fa-solid fa-circle-notch"></i> No Flange (LM)
+              </button>
+              <button type="button" class="wizard-pill" data-series="LMF" data-shape="Round Flange">
+                <i class="fa-regular fa-circle"></i> Round Flange (LMF)
+              </button>
+              <button type="button" class="wizard-pill" data-series="LMK" data-shape="Square Flange">
+                <i class="fa-regular fa-square"></i> Square Flange (LMK)
+              </button>
+              <button type="button" class="wizard-pill" data-series="LMH" data-shape="Oval Flange">
+                <i class="fa-solid fa-ellipsis"></i> Oval Flange (LMH)
+              </button>
             </div>
           </div>
 
           <div class="wizard-step" id="step2Container">
             <div class="wizard-step-header">
-              <span class="wizard-step-badge">Step 2</span>
+              <span class="wizard-step-badge">Step 2 &bull; Size</span>
               <span class="wizard-step-title">Select Shaft / Bore Diameter (mm)</span>
             </div>
-            <div class="wizard-input-wrap">
-              <input type="text" id="breakdownDiaInput" class="wizard-input" placeholder="Type diameter (e.g. 20, 25, 30)..." value="20" autocomplete="off">
-            </div>
             <div class="wizard-pills-row" id="diaQuickPills">
+              <button type="button" class="wizard-pill" data-dia="6">&Oslash; 6 mm</button>
+              <button type="button" class="wizard-pill" data-dia="8">&Oslash; 8 mm</button>
+              <button type="button" class="wizard-pill" data-dia="10">&Oslash; 10 mm</button>
+              <button type="button" class="wizard-pill active" data-dia="20">&Oslash; 20 mm</button>
+              <button type="button" class="wizard-pill" data-dia="12">&Oslash; 12 mm</button>
+              <button type="button" class="wizard-pill" data-dia="16">&Oslash; 16 mm</button>
+              <button type="button" class="wizard-pill" data-dia="25">&Oslash; 25 mm</button>
+              <button type="button" class="wizard-pill" data-dia="30">&Oslash; 30 mm</button>
             </div>
           </div>
 
           <div class="wizard-step" id="step3Container">
             <div class="wizard-step-header">
-              <span class="wizard-step-badge">Step 3</span>
-              <span class="wizard-step-title">Select Seal &amp; Retainer Specification</span>
+              <span class="wizard-step-badge">Step 3 &bull; Length</span>
+              <span class="wizard-step-title">Select Bushing Length Specification</span>
+            </div>
+            <div class="wizard-pills-row" id="lengthQuickPills">
+              <button type="button" class="wizard-pill active" data-len="normal">Normal (Standard)</button>
+              <button type="button" class="wizard-pill" data-len="long">Long (Double Length &bull; "L")</button>
+              <button type="button" class="wizard-pill" data-len="small">Small (Compact &bull; "S")</button>
+            </div>
+          </div>
+
+          <div class="wizard-step" id="step4Container">
+            <div class="wizard-step-header">
+              <span class="wizard-step-badge">Step 4 &bull; Seal &amp; Retainer</span>
+              <span class="wizard-step-title">Select Seal Specification</span>
             </div>
             <div class="wizard-pills-row" id="sealQuickPills">
+              <button type="button" class="wizard-pill active" data-seal="UU">UU Seal (Double Rubber Lip)</button>
+              <button type="button" class="wizard-pill" data-seal="none">No Seal (Open Ends)</button>
+              <button type="button" class="wizard-pill" data-seal="cage">Steel Cage (High-Temp Metal "GA")</button>
             </div>
           </div>
         </div>
@@ -855,7 +877,7 @@
             <div>
               <span class="result-brand-tag" id="resBrandTag">THK JAPAN AUTHENTIC</span>
               <div class="result-part-code" id="resPartCode">LM20UU</div>
-              <div class="result-part-name" id="resPartName">Precision Cylindrical Linear Bushing</div>
+              <div class="result-part-name" id="resPartName">No Flange Cylindrical Linear Bushing</div>
             </div>
             <div class="result-status-pill" id="resStockPill">
               <i class="fa-solid fa-circle-check"></i> In Stock (Bengaluru / Pune)
@@ -865,7 +887,7 @@
           <div class="nomenclature-decoder-bar" id="resNomenclatureBar">
             <div class="nomen-token">
               <span class="nomen-val" id="nomToken1">LM</span>
-              <span class="nomen-lbl" id="nomLbl1">Linear Bushing Series</span>
+              <span class="nomen-lbl" id="nomLbl1">No Flange (Cylindrical)</span>
             </div>
             <div class="nomen-sep">+</div>
             <div class="nomen-token">
@@ -874,8 +896,13 @@
             </div>
             <div class="nomen-sep">+</div>
             <div class="nomen-token">
-              <span class="nomen-val" id="nomToken3">UU</span>
-              <span class="nomen-lbl" id="nomLbl3">Double Nitrile Rubber Seals</span>
+              <span class="nomen-val" id="nomToken3">Standard</span>
+              <span class="nomen-lbl" id="nomLbl3">Normal Length</span>
+            </div>
+            <div class="nomen-sep">+</div>
+            <div class="nomen-token">
+              <span class="nomen-val" id="nomToken4">UU</span>
+              <span class="nomen-lbl" id="nomLbl4">Double Nitrile Rubber Seals</span>
             </div>
           </div>
 
@@ -887,6 +914,10 @@
             <div class="res-spec-item">
               <span class="spec-label">Outer Diameter (&Oslash;D)</span>
               <strong class="spec-val" id="specValD">32 mm</strong>
+            </div>
+            <div class="res-spec-item">
+              <span class="spec-label">Flange Dimension</span>
+              <strong class="spec-val" id="specValFlange">No Flange (Cylindrical)</strong>
             </div>
             <div class="res-spec-item">
               <span class="spec-label">Overall Length (L)</span>
@@ -904,6 +935,10 @@
               <span class="spec-label">Recommended Shaft Fit</span>
               <strong class="spec-val" id="specValFit">ISO 286 g6 / h6</strong>
             </div>
+            <div class="res-spec-item">
+              <span class="spec-label">Housing Fit</span>
+              <strong class="spec-val" id="specValHousing">ISO 286 H7</strong>
+            </div>
           </div>
 
           <div class="result-actions-row">
@@ -917,6 +952,68 @@
               <i class="fa-solid fa-paper-plane"></i> Request Quote
             </a>
           </div>
+        </div>
+      </div>
+
+      <div class="nomen-ref-table-wrap">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:6px;">
+          <h3 style="font-size:16px; font-weight:800; color:var(--white); display:flex; align-items:center; gap:8px;">
+            <i class="fa-solid fa-table-list" style="color:var(--rollmann-cyan);"></i> Official THK Linear Bushing Nomenclature Matrix
+          </h3>
+          <span style="font-size:12px; color:var(--gray-400);">Click any row to instantly load into the decoder above</span>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="nomen-table">
+            <thead>
+              <tr>
+                <th>Shape</th>
+                <th>Part Series</th>
+                <th>Size</th>
+                <th>Length</th>
+                <th>Seal</th>
+                <th>Decoded Model Code</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="clickable-row" data-series="LM" data-dia="6" data-len="small" data-seal="none">
+                <td><strong>No Flange</strong></td>
+                <td><span style="color:var(--rollmann-cyan); font-weight:800; font-family:var(--font-mono);">LM</span></td>
+                <td>6 mm</td>
+                <td>Small</td>
+                <td><span style="color:#60A5FA; font-weight:700;">No Seal</span></td>
+                <td><span class="nomen-code-pill">LM6S</span></td>
+                <td><button type="button" class="wizard-pill" style="padding:3px 10px; font-size:11px;">Test &rarr;</button></td>
+              </tr>
+              <tr class="clickable-row" data-series="LMF" data-dia="8" data-len="normal" data-seal="UU">
+                <td><strong style="color:#F87171;">Round Flange</strong></td>
+                <td><span style="color:#F87171; font-weight:800; font-family:var(--font-mono);">LMF</span></td>
+                <td>8 mm</td>
+                <td><span style="color:#F87171; font-weight:700;">Normal</span></td>
+                <td><span style="color:#F87171; font-weight:700;">UU Seal</span></td>
+                <td><span class="nomen-code-pill">LMF8UU</span></td>
+                <td><button type="button" class="wizard-pill" style="padding:3px 10px; font-size:11px;">Test &rarr;</button></td>
+              </tr>
+              <tr class="clickable-row" data-series="LMK" data-dia="10" data-len="long" data-seal="cage">
+                <td><strong style="color:#60A5FA;">Square Flange</strong></td>
+                <td><span style="color:#60A5FA; font-weight:800; font-family:var(--font-mono);">LMK</span></td>
+                <td>10 mm</td>
+                <td><span style="color:#60A5FA; font-weight:700;">Long</span></td>
+                <td>Steel Cage</td>
+                <td><span class="nomen-code-pill">LMK10LGA</span></td>
+                <td><button type="button" class="wizard-pill" style="padding:3px 10px; font-size:11px;">Test &rarr;</button></td>
+              </tr>
+              <tr class="clickable-row" data-series="LMH" data-dia="20" data-len="normal" data-seal="UU">
+                <td><strong>Oval Flange</strong></td>
+                <td><span style="color:var(--rollmann-cyan); font-weight:800; font-family:var(--font-mono);">LMH</span></td>
+                <td><strong style="color:#F87171;">20 mm</strong></td>
+                <td>Normal</td>
+                <td>UU Seal</td>
+                <td><span class="nomen-code-pill">LMH20UU</span></td>
+                <td><button type="button" class="wizard-pill" style="padding:3px 10px; font-size:11px;">Test &rarr;</button></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
