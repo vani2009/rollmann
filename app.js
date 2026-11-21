@@ -1085,7 +1085,7 @@ class RollmannApp {
     const diaPills = document.querySelectorAll('#diaQuickPills .wizard-pill');
     const lenPills = document.querySelectorAll('#lengthQuickPills .wizard-pill');
     const sealPills = document.querySelectorAll('#sealQuickPills .wizard-pill');
-    const tableRows = document.querySelectorAll('.nomen-table .clickable-row');
+    const tableRows = document.querySelectorAll('.user-spec-table .clickable-row');
 
     const resBrandTag = document.getElementById('resBrandTag');
     const resPartCode = document.getElementById('resPartCode');
@@ -1113,63 +1113,78 @@ class RollmannApp {
     const cadLink = document.getElementById('resCadLink');
     const addBomBtn = document.getElementById('resAddBomBtn');
 
+    const chatPrompt = document.getElementById('guidedChatPrompt');
+    const stepBadge = document.getElementById('guidedStepBadge');
+    const chatInput = document.getElementById('guidedChatInput');
+    const chatSubmit = document.getElementById('guidedChatSubmit');
+    const chatReset = document.getElementById('guidedChatReset');
+    const chatChips = document.getElementById('guidedChatChips');
+
+    const btnRedEx = document.getElementById('btnQuickRedEx');
+    const btnBlueEx = document.getElementById('btnQuickBlueEx');
+
     if (!resPartCode) return;
 
-    const bushingDb = {
+    const thk508Db = {
       LM: {
         name: 'No Flange Cylindrical Linear Bushing',
         shapeLbl: 'No Flange (Cylindrical)',
+        catalogPage: 'Cat. 508-2E p. A4-44',
         sizes: {
-          6: { D: 12, flange: 'No Flange (Cylindrical)', normalL: 19, smallL: 15, longL: 35, normalC: 206, normalC0: 265, longC: 323, longC0: 530, stock: 'Bengaluru (Immediate)' },
-          8: { D: 15, flange: 'No Flange (Cylindrical)', normalL: 24, smallL: 17, longL: 45, normalC: 265, normalC0: 402, longC: 431, longC0: 784, stock: 'Bengaluru / Pune (Immediate)' },
-          10: { D: 19, flange: 'No Flange (Cylindrical)', normalL: 29, smallL: 22, longL: 55, normalC: 372, normalC0: 549, longC: 588, longC0: 1100, stock: 'Pune (Immediate)' },
-          12: { D: 21, flange: 'No Flange (Cylindrical)', normalL: 30, smallL: 24, longL: 57, normalC: 410, normalC0: 590, longC: 657, longC0: 1200, stock: 'Bengaluru / Delhi (Immediate)' },
-          16: { D: 28, flange: 'No Flange (Cylindrical)', normalL: 37, smallL: 28, longL: 70, normalC: 775, normalC0: 1180, longC: 1230, longC0: 2350, stock: 'Bengaluru / Pune (Immediate)' },
-          20: { D: 32, flange: 'No Flange (Cylindrical)', normalL: 42, smallL: 30, longL: 80, normalC: 860, normalC0: 1370, longC: 1400, longC0: 2740, stock: 'Bengaluru / Pune (Immediate)' },
-          25: { D: 40, flange: 'No Flange (Cylindrical)', normalL: 59, smallL: 40, longL: 112, normalC: 980, normalC0: 1570, longC: 1560, longC0: 3140, stock: 'Bengaluru / Pune (Immediate)' },
-          30: { D: 45, flange: 'No Flange (Cylindrical)', normalL: 64, smallL: 45, longL: 123, normalC: 1570, normalC0: 2740, longC: 2490, longC0: 5490, stock: 'Pune / Delhi (Immediate)' }
+          4: { D: 8, flange: 'No Flange (Cylindrical)', normalL: 12, smallL: 10, longL: 23, normalC: 88.2, normalC0: 127, longC: 139, longC0: 254, normalMass: 1.9, longMass: 4, stock: 'Bengaluru (Immediate)' },
+          6: { D: 12, flange: 'No Flange (Cylindrical)', normalL: 19, smallL: 15, longL: 35, normalC: 206, normalC0: 265, longC: 324, longC0: 529, normalMass: 8, longMass: 16, stock: 'Bengaluru / Pune (Immediate)' },
+          8: { D: 15, flange: 'No Flange (Cylindrical)', normalL: 24, smallL: 17, longL: 45, normalC: 265, normalC0: 402, longC: 431, longC0: 784, normalMass: 16, longMass: 31, stock: 'Bengaluru / Pune (Immediate)' },
+          10: { D: 19, flange: 'No Flange (Cylindrical)', normalL: 29, smallL: 22, longL: 55, normalC: 373, normalC0: 549, longC: 588, longC0: 1100, normalMass: 30, longMass: 62, stock: 'Pune (Immediate)' },
+          12: { D: 21, flange: 'No Flange (Cylindrical)', normalL: 30, smallL: 24, longL: 57, normalC: 412, normalC0: 598, longC: 657, longC0: 1200, normalMass: 31.5, longMass: 80, stock: 'Bengaluru / Delhi (Immediate)' },
+          16: { D: 28, flange: 'No Flange (Cylindrical)', normalL: 37, smallL: 28, longL: 70, normalC: 775, normalC0: 1180, longC: 1230, longC0: 2350, normalMass: 69, longMass: 145, stock: 'Bengaluru / Pune (Immediate)' },
+          20: { D: 32, flange: 'No Flange (Cylindrical)', normalL: 42, smallL: 30, longL: 80, normalC: 863, normalC0: 1370, longC: 1400, longC0: 2750, normalMass: 87, longMass: 180, stock: 'Bengaluru / Pune (Immediate)' },
+          25: { D: 40, flange: 'No Flange (Cylindrical)', normalL: 59, smallL: 40, longL: 112, normalC: 980, normalC0: 1570, longC: 1560, longC0: 3140, normalMass: 220, longMass: 440, stock: 'Bengaluru / Pune (Immediate)' },
+          30: { D: 45, flange: 'No Flange (Cylindrical)', normalL: 64, smallL: 45, longL: 123, normalC: 1570, normalC0: 2750, longC: 2490, longC0: 5490, normalMass: 250, longMass: 580, stock: 'Pune / Delhi (Immediate)' }
         }
       },
       LMF: {
         name: 'Round Flange Precision Linear Bushing',
         shapeLbl: 'Round Flange (JIS Mounting)',
+        catalogPage: 'Cat. 508-2E p. A4-54',
         sizes: {
-          6: { D: 12, flange: 'Round Flange ØD1=28 mm', normalL: 19, smallL: 15, longL: 35, normalC: 206, normalC0: 265, longC: 323, longC0: 530, stock: 'Bengaluru (Immediate)' },
-          8: { D: 15, flange: 'Round Flange ØD1=32 mm', normalL: 24, smallL: 17, longL: 45, normalC: 265, normalC0: 402, longC: 431, longC0: 784, stock: 'Bengaluru / Pune (Immediate)' },
-          10: { D: 19, flange: 'Round Flange ØD1=40 mm', normalL: 29, smallL: 22, longL: 55, normalC: 372, normalC0: 549, longC: 588, longC0: 1100, stock: 'Pune (Immediate)' },
-          12: { D: 21, flange: 'Round Flange ØD1=42 mm', normalL: 30, smallL: 24, longL: 57, normalC: 410, normalC0: 590, longC: 657, longC0: 1200, stock: 'Bengaluru (Immediate)' },
-          16: { D: 28, flange: 'Round Flange ØD1=48 mm', normalL: 37, smallL: 28, longL: 70, normalC: 775, normalC0: 1180, longC: 1230, longC0: 2350, stock: 'Bengaluru / Pune (Immediate)' },
-          20: { D: 32, flange: 'Round Flange ØD1=54 mm', normalL: 42, smallL: 30, longL: 80, normalC: 860, normalC0: 1370, longC: 1400, longC0: 2740, stock: 'Bengaluru / Pune (Immediate)' },
-          25: { D: 40, flange: 'Round Flange ØD1=62 mm', normalL: 59, smallL: 40, longL: 112, normalC: 980, normalC0: 1570, longC: 1560, longC0: 3140, stock: 'Pune (Immediate)' },
-          30: { D: 45, flange: 'Round Flange ØD1=74 mm', normalL: 64, smallL: 45, longL: 123, normalC: 1570, normalC0: 2740, longC: 2490, longC0: 5490, stock: 'Bengaluru / Delhi (Immediate)' }
+          6: { D: 12, flange: 'Round Flange ØD1=28 mm (PCD 20 mm)', normalL: 19, smallL: 15, longL: 35, normalC: 206, normalC0: 265, longC: 324, longC0: 529, normalMass: 26.5, longMass: 32, stock: 'Bengaluru (Immediate)' },
+          8: { D: 15, flange: 'Round Flange ØD1=32 mm (PCD 24 mm)', normalL: 24, smallL: 17, longL: 45, normalC: 265, normalC0: 402, longC: 431, longC0: 784, normalMass: 40, longMass: 53, stock: 'Bengaluru / Pune (Immediate)' },
+          10: { D: 19, flange: 'Round Flange ØD1=39 mm (PCD 29 mm)', normalL: 29, smallL: 22, longL: 55, normalC: 373, normalC0: 549, longC: 588, longC0: 1100, normalMass: 78, longMass: 105, stock: 'Pune (Immediate)' },
+          12: { D: 21, flange: 'Round Flange ØD1=42 mm (PCD 32 mm)', normalL: 30, smallL: 24, longL: 57, normalC: 412, normalC0: 598, longC: 657, longC0: 1200, normalMass: 76, longMass: 100, stock: 'Bengaluru (Immediate)' },
+          16: { D: 28, flange: 'Round Flange ØD1=48 mm (PCD 38 mm)', normalL: 37, smallL: 28, longL: 70, normalC: 775, normalC0: 1180, longC: 1230, longC0: 2350, normalMass: 134, longMass: 187, stock: 'Bengaluru / Pune (Immediate)' },
+          20: { D: 32, flange: 'Round Flange ØD1=54 mm (PCD 43 mm)', normalL: 42, smallL: 30, longL: 80, normalC: 863, normalC0: 1370, longC: 1400, longC0: 2750, normalMass: 180, longMass: 260, stock: 'Bengaluru / Pune (Immediate)' },
+          25: { D: 40, flange: 'Round Flange ØD1=62 mm (PCD 51 mm)', normalL: 59, smallL: 40, longL: 112, normalC: 980, normalC0: 1570, longC: 1560, longC0: 3140, normalMass: 340, longMass: 515, stock: 'Pune (Immediate)' },
+          30: { D: 45, flange: 'Round Flange ØD1=74 mm (PCD 60 mm)', normalL: 64, smallL: 45, longL: 123, normalC: 1570, normalC0: 2750, longC: 2490, longC0: 5490, normalMass: 460, longMass: 655, stock: 'Bengaluru / Delhi (Immediate)' }
         }
       },
       LMK: {
         name: 'Square Flange Precision Linear Bushing',
         shapeLbl: 'Square Flange (Compact Mounting)',
+        catalogPage: 'Cat. 508-2E p. A4-62',
         sizes: {
-          6: { D: 12, flange: 'Square Flange 22 × 22 mm', normalL: 19, smallL: 15, longL: 35, normalC: 206, normalC0: 265, longC: 323, longC0: 530, stock: 'Bengaluru (Immediate)' },
-          8: { D: 15, flange: 'Square Flange 25 × 25 mm', normalL: 24, smallL: 17, longL: 45, normalC: 265, normalC0: 402, longC: 431, longC0: 784, stock: 'Bengaluru / Pune (Immediate)' },
-          10: { D: 19, flange: 'Square Flange 30 × 30 mm', normalL: 29, smallL: 22, longL: 55, normalC: 372, normalC0: 549, longC: 588, longC0: 1100, stock: 'Pune (Immediate)' },
-          12: { D: 21, flange: 'Square Flange 32 × 32 mm', normalL: 30, smallL: 24, longL: 57, normalC: 410, normalC0: 590, longC: 657, longC0: 1200, stock: 'Bengaluru (Immediate)' },
-          16: { D: 28, flange: 'Square Flange 37 × 37 mm', normalL: 37, smallL: 28, longL: 70, normalC: 775, normalC0: 1180, longC: 1230, longC0: 2350, stock: 'Bengaluru / Pune (Immediate)' },
-          20: { D: 32, flange: 'Square Flange 42 × 42 mm', normalL: 42, smallL: 30, longL: 80, normalC: 860, normalC0: 1370, longC: 1400, longC0: 2740, stock: 'Bengaluru / Pune (Immediate)' },
-          25: { D: 40, flange: 'Square Flange 50 × 50 mm', normalL: 59, smallL: 40, longL: 112, normalC: 980, normalC0: 1570, longC: 1560, longC0: 3140, stock: 'Pune (Immediate)' },
-          30: { D: 45, flange: 'Square Flange 58 × 58 mm', normalL: 64, smallL: 45, longL: 123, normalC: 1570, normalC0: 2740, longC: 2490, longC0: 5490, stock: 'Bengaluru / Delhi (Immediate)' }
+          6: { D: 12, flange: 'Square Flange 22 × 22 mm (PCD 20 mm)', normalL: 19, smallL: 15, longL: 35, normalC: 206, normalC0: 265, longC: 324, longC0: 529, normalMass: 18.5, longMass: 26, stock: 'Bengaluru (Immediate)' },
+          8: { D: 15, flange: 'Square Flange 25 × 25 mm (PCD 24 mm)', normalL: 24, smallL: 17, longL: 45, normalC: 265, normalC0: 402, longC: 431, longC0: 784, normalMass: 29, longMass: 46, stock: 'Bengaluru / Pune (Immediate)' },
+          10: { D: 19, flange: 'Square Flange 30 × 30 mm (PCD 29 mm)', normalL: 29, smallL: 22, longL: 55, normalC: 373, normalC0: 549, longC: 588, longC0: 1100, normalMass: 61, longMass: 88, stock: 'Pune (Immediate)' },
+          12: { D: 21, flange: 'Square Flange 32 × 32 mm (PCD 32 mm)', normalL: 30, smallL: 24, longL: 57, normalC: 412, normalC0: 598, longC: 657, longC0: 1200, normalMass: 56, longMass: 82, stock: 'Bengaluru (Immediate)' },
+          16: { D: 28, flange: 'Square Flange 37 × 37 mm (PCD 38 mm)', normalL: 37, smallL: 28, longL: 70, normalC: 775, normalC0: 1180, longC: 1230, longC0: 2350, normalMass: 104, longMass: 160, stock: 'Bengaluru / Pune (Immediate)' },
+          20: { D: 32, flange: 'Square Flange 42 × 42 mm (PCD 43 mm)', normalL: 42, smallL: 30, longL: 80, normalC: 863, normalC0: 1370, longC: 1400, longC0: 2750, normalMass: 145, longMass: 230, stock: 'Bengaluru / Pune (Immediate)' },
+          25: { D: 40, flange: 'Square Flange 50 × 50 mm (PCD 51 mm)', normalL: 59, smallL: 40, longL: 112, normalC: 980, normalC0: 1570, longC: 1560, longC0: 3140, normalMass: 300, longMass: 475, stock: 'Pune (Immediate)' },
+          30: { D: 45, flange: 'Square Flange 58 × 58 mm (PCD 60 mm)', normalL: 64, smallL: 45, longL: 123, normalC: 1570, normalC0: 2750, longC: 2490, longC0: 5490, normalMass: 375, longMass: 575, stock: 'Bengaluru / Delhi (Immediate)' }
         }
       },
       LMH: {
         name: 'Oval Two-Cut Flange Linear Bushing',
         shapeLbl: 'Oval / Two-Cut Flange (Narrow Space)',
+        catalogPage: 'Cat. 508-2E p. A4-70',
         sizes: {
-          6: { D: 12, flange: 'Oval Flange 18 × 28 mm', normalL: 19, smallL: 15, longL: 35, normalC: 206, normalC0: 265, longC: 323, longC0: 530, stock: 'Bengaluru (Immediate)' },
-          8: { D: 15, flange: 'Oval Flange 21 × 32 mm', normalL: 24, smallL: 17, longL: 45, normalC: 265, normalC0: 402, longC: 431, longC0: 784, stock: 'Bengaluru / Pune (Immediate)' },
-          10: { D: 19, flange: 'Oval Flange 25 × 40 mm', normalL: 29, smallL: 22, longL: 55, normalC: 372, normalC0: 549, longC: 588, longC0: 1100, stock: 'Pune (Immediate)' },
-          12: { D: 21, flange: 'Oval Flange 27 × 42 mm', normalL: 30, smallL: 24, longL: 57, normalC: 410, normalC0: 590, longC: 657, longC0: 1200, stock: 'Bengaluru (Immediate)' },
-          16: { D: 28, flange: 'Oval Flange 32 × 48 mm', normalL: 37, smallL: 28, longL: 70, normalC: 775, normalC0: 1180, longC: 1230, longC0: 2350, stock: 'Bengaluru / Pune (Immediate)' },
-          20: { D: 32, flange: 'Oval Flange 38 × 54 mm', normalL: 42, smallL: 30, longL: 80, normalC: 860, normalC0: 1370, longC: 1400, longC0: 2740, stock: 'Bengaluru / Pune (Immediate)' },
-          25: { D: 40, flange: 'Oval Flange 46 × 62 mm', normalL: 59, smallL: 40, longL: 112, normalC: 980, normalC0: 1570, longC: 1560, longC0: 3140, stock: 'Pune (Immediate)' },
-          30: { D: 45, flange: 'Oval Flange 54 × 74 mm', normalL: 64, smallL: 45, longL: 123, normalC: 1570, normalC0: 2740, longC: 2490, longC0: 5490, stock: 'Bengaluru / Delhi (Immediate)' }
+          6: { D: 12, flange: 'Oval Flange 18 × 28 mm (B 20 mm)', normalL: 19, smallL: 15, longL: 35, normalC: 206, normalC0: 265, longC: 324, longC0: 529, normalMass: 18, longMass: 28, stock: 'Bengaluru (Immediate)' },
+          8: { D: 15, flange: 'Oval Flange 21 × 32 mm (B 24 mm)', normalL: 24, smallL: 17, longL: 45, normalC: 265, normalC0: 402, longC: 431, longC0: 784, normalMass: 28, longMass: 40, stock: 'Bengaluru / Pune (Immediate)' },
+          10: { D: 19, flange: 'Oval Flange 25 × 39 mm (B 29 mm)', normalL: 29, smallL: 22, longL: 55, normalC: 373, normalC0: 549, longC: 588, longC0: 1100, normalMass: 50, longMass: 75, stock: 'Pune (Immediate)' },
+          12: { D: 21, flange: 'Oval Flange 27 × 42 mm (B 32 mm)', normalL: 30, smallL: 24, longL: 57, normalC: 412, normalC0: 598, longC: 657, longC0: 1200, normalMass: 55, longMass: 82, stock: 'Bengaluru (Immediate)' },
+          16: { D: 28, flange: 'Oval Flange 34 × 48 mm (B 31 mm)', normalL: 37, smallL: 28, longL: 70, normalC: 775, normalC0: 1180, longC: 1230, longC0: 2350, normalMass: 95, longMass: 143, stock: 'Bengaluru / Pune (Immediate)' },
+          20: { D: 32, flange: 'Oval Flange 38 × 54 mm (B 36 mm)', normalL: 42, smallL: 30, longL: 80, normalC: 863, normalC0: 1370, longC: 1400, longC0: 2750, normalMass: 150, longMass: 225, stock: 'Bengaluru / Pune (Immediate)' },
+          25: { D: 40, flange: 'Oval Flange 46 × 62 mm (B 40 mm)', normalL: 59, smallL: 40, longL: 112, normalC: 980, normalC0: 1570, longC: 1560, longC0: 3140, normalMass: 275, longMass: 450, stock: 'Pune (Immediate)' },
+          30: { D: 45, flange: 'Oval Flange 51 × 74 mm (B 49 mm)', normalL: 64, smallL: 45, longL: 123, normalC: 1570, normalC0: 2750, longC: 2490, longC0: 5490, normalMass: 350, longMass: 575, stock: 'Bengaluru / Delhi (Immediate)' }
         }
       }
     };
@@ -1178,10 +1193,25 @@ class RollmannApp {
     let curDia = 20;
     let curLen = 'normal';
     let curSeal = 'UU';
+    let guidedStep = 1;
 
     const updateDecoder = () => {
-      const seriesObj = bushingDb[curSeries] || bushingDb.LM;
-      const sizeObj = seriesObj.sizes[curDia] || seriesObj.sizes[20];
+      let seriesObj = thk508Db[curSeries];
+      if (!seriesObj) {
+        curSeries = 'LM';
+        seriesObj = thk508Db.LM;
+      }
+
+      const availableSizes = Object.keys(seriesObj.sizes).map(Number);
+      if (!availableSizes.includes(curDia)) {
+        curDia = availableSizes.includes(20) ? 20 : availableSizes[0];
+        diaPills.forEach(b => {
+          if (Number(b.getAttribute('data-dia')) === curDia) b.classList.add('active');
+          else b.classList.remove('active');
+        });
+      }
+
+      const sizeObj = seriesObj.sizes[curDia] || seriesObj.sizes[availableSizes[0]];
 
       let lenCode = '';
       let lenName = 'Normal Length';
@@ -1189,14 +1219,16 @@ class RollmannApp {
       let lengthVal = sizeObj.normalL;
       let dynC = sizeObj.normalC;
       let statC0 = sizeObj.normalC0;
+      let curMass = sizeObj.normalMass;
 
       if (curLen === 'long') {
         lenCode = 'L';
-        lenName = 'Long (Double Length)';
+        lenName = 'Long (Double Length • Doubled Load)';
         lenToken = 'L (Long)';
         lengthVal = sizeObj.longL;
         dynC = sizeObj.longC;
         statC0 = sizeObj.longC0;
+        curMass = sizeObj.longMass;
       } else if (curLen === 'small') {
         lenCode = 'S';
         lenName = 'Small (Compact Length)';
@@ -1210,26 +1242,31 @@ class RollmannApp {
 
       if (curSeal === 'UU') {
         sealCode = 'UU';
-        sealName = 'Double Nitrile Rubber Lip Seals';
+        sealName = 'Double Nitrile Rubber Lip Contact Seals';
         sealToken = 'UU';
       } else if (curSeal === 'cage') {
         sealCode = 'GA';
-        sealName = 'Steel Cage (High-Temp Metal Retainer)';
+        sealName = 'High-Temp Metal Retainer (rated to 120°C)';
         sealToken = 'GA (Metal)';
       }
 
-      const fullCode = curSeries + curDia + lenCode + sealCode;
+      let fullCode = '';
+      if (curSeal === 'cage') {
+        fullCode = curSeries + curDia + (curLen === 'small' ? 'S' : (curLen === 'long' ? 'L' : '')) + 'GA';
+      } else {
+        fullCode = curSeries + curDia + lenCode + sealCode;
+      }
 
-      resBrandTag.textContent = 'THK JAPAN AUTHENTIC';
+      resBrandTag.innerHTML = 'THK JAPAN AUTHENTIC &bull; <span style="color:var(--gray-400);">' + seriesObj.catalogPage + '</span>';
       resPartCode.textContent = fullCode;
-      resPartName.textContent = seriesObj.name + (curLen === 'long' ? ' (Double Length)' : '');
+      resPartName.textContent = seriesObj.name + (curLen === 'long' ? ' (Long Double-Capacity)' : (curLen === 'small' ? ' (Compact Small)' : ''));
       resStockPill.innerHTML = '<i class="fa-solid fa-circle-check"></i> In Stock (' + sizeObj.stock + ')';
 
       nomToken1.textContent = curSeries;
       nomLbl1.textContent = seriesObj.shapeLbl;
 
-      nomToken2.textContent = curDia + 'mm';
-      nomLbl2.textContent = curDia + 'mm Shaft Diameter';
+      nomToken2.textContent = curDia + ' mm';
+      nomLbl2.textContent = 'Ø' + curDia + 'mm Shaft Inscribed Dia';
 
       nomToken3.textContent = lenToken;
       nomLbl3.textContent = lenName;
@@ -1240,50 +1277,279 @@ class RollmannApp {
       specDr.textContent = curDia + ' mm';
       specD.textContent = sizeObj.D + ' mm';
       specFlange.textContent = sizeObj.flange;
-      specL.textContent = lengthVal + ' mm';
+      specL.textContent = lengthVal + ' mm (Mass ' + curMass + 'g)';
       specC.textContent = dynC.toLocaleString() + ' N';
       specC0.textContent = statC0.toLocaleString() + ' N';
       specFit.textContent = 'ISO 286 g6 / h6';
-      specHousing.textContent = 'ISO 286 H7';
+      specHousing.textContent = 'ISO 286 H7 (Loose) / J7 (Transition)';
 
       if (cadLink) {
         cadLink.href = 'linear-bush.html?model=' + fullCode;
       }
+
+      syncWizardPills();
     };
+
+    const syncWizardPills = () => {
+      shapePills.forEach(b => {
+        if (b.getAttribute('data-series') === curSeries) b.classList.add('active');
+        else b.classList.remove('active');
+      });
+      diaPills.forEach(b => {
+        if (Number(b.getAttribute('data-dia')) === curDia) b.classList.add('active');
+        else b.classList.remove('active');
+      });
+      lenPills.forEach(b => {
+        if (b.getAttribute('data-len') === curLen) b.classList.add('active');
+        else b.classList.remove('active');
+      });
+      sealPills.forEach(b => {
+        if (b.getAttribute('data-seal') === curSeal) b.classList.add('active');
+        else b.classList.remove('active');
+      });
+    };
+
+    const updateChatAssistant = () => {
+      if (!chatPrompt || !chatChips || !stepBadge) return;
+
+      if (guidedStep === 1) {
+        stepBadge.textContent = 'Step 1 of 4';
+        chatPrompt.textContent = 'Step 1: Enter or select Part Series (e.g. "LM", "LMF", "LMK", "LMH") or Shape (e.g. "Round Flange"):';
+        chatChips.innerHTML = `
+          <button type="button" class="guided-chip" data-step="1" data-val="LM"><i class="fa-solid fa-circle-notch"></i> No Flange (LM)</button>
+          <button type="button" class="guided-chip" data-step="1" data-val="LMF"><i class="fa-regular fa-circle"></i> Round Flange (LMF)</button>
+          <button type="button" class="guided-chip" data-step="1" data-val="LMK"><i class="fa-regular fa-square"></i> Square Flange (LMK)</button>
+          <button type="button" class="guided-chip" data-step="1" data-val="LMH"><i class="fa-solid fa-ellipsis"></i> Oval Flange (LMH)</button>
+        `;
+        if (chatInput) {
+          chatInput.placeholder = "Type series (e.g. 'LM', 'LMF', 'Round Flange')...";
+          chatInput.value = '';
+        }
+      } else if (guidedStep === 2) {
+        stepBadge.textContent = 'Step 2 of 4';
+        chatPrompt.innerHTML = 'Step 2: Selected <strong>' + curSeries + '</strong>. Enter Shaft Bore Diameter in mm (e.g. 6, 8, 10, 20):';
+        chatChips.innerHTML = `
+          <button type="button" class="guided-chip" data-step="2" data-val="6">&Oslash; 6 mm</button>
+          <button type="button" class="guided-chip" data-step="2" data-val="8">&Oslash; 8 mm</button>
+          <button type="button" class="guided-chip" data-step="2" data-val="10">&Oslash; 10 mm</button>
+          <button type="button" class="guided-chip" data-step="2" data-val="20">&Oslash; 20 mm</button>
+          <button type="button" class="guided-chip" data-step="2" data-val="12">&Oslash; 12 mm</button>
+          <button type="button" class="guided-chip" data-step="2" data-val="16">&Oslash; 16 mm</button>
+        `;
+        if (chatInput) {
+          chatInput.placeholder = "Enter diameter (e.g. 20, 10, 8, 6)...";
+          chatInput.value = '';
+        }
+      } else if (guidedStep === 3) {
+        stepBadge.textContent = 'Step 3 of 4';
+        chatPrompt.innerHTML = 'Step 3: Selected <strong>' + curSeries + curDia + '</strong>. Enter Bushing Length (Normal, Long, Small):';
+        chatChips.innerHTML = `
+          <button type="button" class="guided-chip" data-step="3" data-val="small">Small (Compact "S")</button>
+          <button type="button" class="guided-chip" data-step="3" data-val="normal">Normal (Standard)</button>
+          <button type="button" class="guided-chip" data-step="3" data-val="long">Long (Double Length "L")</button>
+        `;
+        if (chatInput) {
+          chatInput.placeholder = "Enter length (e.g. Normal, Long, Small)...";
+          chatInput.value = '';
+        }
+      } else if (guidedStep === 4) {
+        stepBadge.textContent = 'Step 4 of 4';
+        chatPrompt.innerHTML = 'Step 4: Selected <strong>' + curSeries + curDia + (curLen === 'long' ? 'L' : (curLen === 'small' ? 'S' : '')) + '</strong>. Enter Seal (UU, No Seal, Steel Cage):';
+        chatChips.innerHTML = `
+          <button type="button" class="guided-chip" data-step="4" data-val="UU">UU Seal (Double Rubber Lip)</button>
+          <button type="button" class="guided-chip" data-step="4" data-val="none">No Seal (Open Ends)</button>
+          <button type="button" class="guided-chip" data-step="4" data-val="cage">Steel Cage ("GA" Metal)</button>
+        `;
+        if (chatInput) {
+          chatInput.placeholder = "Enter seal (e.g. UU, No Seal, Steel Cage)...";
+          chatInput.value = '';
+        }
+      } else if (guidedStep === 5) {
+        stepBadge.textContent = 'Configured';
+        const code = resPartCode.textContent.trim();
+        chatPrompt.innerHTML = '<span style="color:#22C55E; font-weight:800;"><i class="fa-solid fa-circle-check"></i> Decoded: ' + code + '</span> &bull; THK 508-2E authentic specs loaded into the engineering specifier below!';
+        chatChips.innerHTML = `
+          <button type="button" class="guided-chip" data-step="restart" data-val="restart"><i class="fa-solid fa-rotate-left"></i> Configure Another Part</button>
+          <button type="button" class="guided-chip" data-step="quick" data-val="LM20UU">Load LM20UU</button>
+          <button type="button" class="guided-chip" data-step="quick" data-val="LMF20UU">Load LMF20UU</button>
+          <button type="button" class="guided-chip" data-step="quick" data-val="LMK10LGA">Load LMK10LGA</button>
+        `;
+        if (chatInput) {
+          chatInput.placeholder = "Search another part code...";
+          chatInput.value = '';
+        }
+      }
+
+      attachChipListeners();
+    };
+
+    const attachChipListeners = () => {
+      if (!chatChips) return;
+      const chips = chatChips.querySelectorAll('.guided-chip');
+      chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          const step = chip.getAttribute('data-step');
+          const val = chip.getAttribute('data-val');
+
+          if (step === '1') {
+            curSeries = val.toUpperCase();
+            guidedStep = 2;
+          } else if (step === '2') {
+            curDia = Number(val);
+            guidedStep = 3;
+          } else if (step === '3') {
+            curLen = val.toLowerCase();
+            guidedStep = 4;
+          } else if (step === '4') {
+            curSeal = val;
+            guidedStep = 5;
+          } else if (step === 'restart') {
+            guidedStep = 1;
+          } else if (step === 'quick') {
+            if (val === 'LM20UU') {
+              curSeries = 'LM'; curDia = 20; curLen = 'normal'; curSeal = 'UU';
+            } else if (val === 'LMF20UU') {
+              curSeries = 'LMF'; curDia = 20; curLen = 'normal'; curSeal = 'UU';
+            } else if (val === 'LMK10LGA') {
+              curSeries = 'LMK'; curDia = 10; curLen = 'long'; curSeal = 'cage';
+            }
+            guidedStep = 5;
+          }
+
+          updateDecoder();
+          updateChatAssistant();
+        });
+      });
+    };
+
+    const handleChatSubmit = () => {
+      if (!chatInput) return;
+      const val = chatInput.value.trim().toLowerCase();
+      if (!val) return;
+
+      if (guidedStep === 1) {
+        if (val.includes('lmf') || val.includes('round')) curSeries = 'LMF';
+        else if (val.includes('lmk') || val.includes('square')) curSeries = 'LMK';
+        else if (val.includes('lmh') || val.includes('oval')) curSeries = 'LMH';
+        else curSeries = 'LM';
+        guidedStep = 2;
+      } else if (guidedStep === 2) {
+        const num = parseInt(val.replace(/D/g, ''), 10);
+        if ([6, 8, 10, 12, 16, 20, 25, 30].includes(num)) {
+          curDia = num;
+        } else {
+          curDia = 20;
+        }
+        guidedStep = 3;
+      } else if (guidedStep === 3) {
+        if (val.includes('long') || val === 'l') curLen = 'long';
+        else if (val.includes('small') || val === 's') curLen = 'small';
+        else curLen = 'normal';
+        guidedStep = 4;
+      } else if (guidedStep === 4) {
+        if (val.includes('none') || val.includes('no') || val === 'open') curSeal = 'none';
+        else if (val.includes('cage') || val.includes('steel') || val.includes('ga') || val.includes('metal')) curSeal = 'cage';
+        else curSeal = 'UU';
+        guidedStep = 5;
+      } else if (guidedStep === 5) {
+        if (val.includes('lmf')) {
+          curSeries = 'LMF';
+        } else if (val.includes('lmk')) {
+          curSeries = 'LMK';
+        } else if (val.includes('lmh')) {
+          curSeries = 'LMH';
+        } else {
+          curSeries = 'LM';
+        }
+        const num = parseInt(val.replace(/D/g, ''), 10);
+        if (num) curDia = num;
+        if (val.includes('uu')) curSeal = 'UU';
+        guidedStep = 5;
+      }
+
+      updateDecoder();
+      updateChatAssistant();
+    };
+
+    if (chatSubmit) chatSubmit.addEventListener('click', handleChatSubmit);
+    if (chatInput) {
+      chatInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          handleChatSubmit();
+        }
+      });
+    }
+
+    if (chatReset) {
+      chatReset.addEventListener('click', () => {
+        curSeries = 'LM';
+        curDia = 20;
+        curLen = 'normal';
+        curSeal = 'UU';
+        guidedStep = 1;
+        updateDecoder();
+        updateChatAssistant();
+      });
+    }
+
+    if (btnRedEx) {
+      btnRedEx.addEventListener('click', () => {
+        curSeries = 'LMF';
+        curDia = 20;
+        curLen = 'normal';
+        curSeal = 'UU';
+        guidedStep = 5;
+        updateDecoder();
+        updateChatAssistant();
+      });
+    }
+
+    if (btnBlueEx) {
+      btnBlueEx.addEventListener('click', () => {
+        curSeries = 'LMK';
+        curDia = 10;
+        curLen = 'long';
+        curSeal = 'none';
+        guidedStep = 5;
+        updateDecoder();
+        updateChatAssistant();
+      });
+    }
 
     shapePills.forEach(btn => {
       btn.addEventListener('click', () => {
-        shapePills.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
         curSeries = btn.getAttribute('data-series');
+        guidedStep = 2;
         updateDecoder();
+        updateChatAssistant();
       });
     });
 
     diaPills.forEach(btn => {
       btn.addEventListener('click', () => {
-        diaPills.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
         curDia = Number(btn.getAttribute('data-dia'));
+        guidedStep = 3;
         updateDecoder();
+        updateChatAssistant();
       });
     });
 
     lenPills.forEach(btn => {
       btn.addEventListener('click', () => {
-        lenPills.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
         curLen = btn.getAttribute('data-len');
+        guidedStep = 4;
         updateDecoder();
+        updateChatAssistant();
       });
     });
 
     sealPills.forEach(btn => {
       btn.addEventListener('click', () => {
-        sealPills.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
         curSeal = btn.getAttribute('data-seal');
+        guidedStep = 5;
         updateDecoder();
+        updateChatAssistant();
       });
     });
 
@@ -1294,51 +1560,27 @@ class RollmannApp {
         const l = row.getAttribute('data-len');
         const sl = row.getAttribute('data-seal');
 
-        if (s) {
-          curSeries = s;
-          shapePills.forEach(b => {
-            if (b.getAttribute('data-series') === s) b.classList.add('active');
-            else b.classList.remove('active');
-          });
-        }
+        if (s) curSeries = s;
+        if (d) curDia = d;
+        if (l) curLen = l;
+        if (sl) curSeal = sl;
 
-        if (d) {
-          curDia = d;
-          diaPills.forEach(b => {
-            if (Number(b.getAttribute('data-dia')) === d) b.classList.add('active');
-            else b.classList.remove('active');
-          });
-        }
-
-        if (l) {
-          curLen = l;
-          lenPills.forEach(b => {
-            if (b.getAttribute('data-len') === l) b.classList.add('active');
-            else b.classList.remove('active');
-          });
-        }
-
-        if (sl) {
-          curSeal = sl;
-          sealPills.forEach(b => {
-            if (b.getAttribute('data-seal') === sl) b.classList.add('active');
-            else b.classList.remove('active');
-          });
-        }
-
+        guidedStep = 5;
         updateDecoder();
+        updateChatAssistant();
       });
     });
 
     if (addBomBtn) {
       addBomBtn.addEventListener('click', () => {
         const code = resPartCode.textContent.trim();
-        this.addToBom(code, 1, 'Configured via THK Linear Bushing Nomenclature Matrix');
+        this.addToBom(code, 1, 'Configured via THK General Catalog 508-2E Nomenclature Matrix');
         this.openBomDrawer();
       });
     }
 
     updateDecoder();
+    updateChatAssistant();
   }
 
 }

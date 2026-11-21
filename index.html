@@ -795,15 +795,42 @@
     </div>
   </section>
 
-    <section class="section-breakdown" id="partBreakdownSection">
+        <section class="section-breakdown" id="partBreakdownSection">
     <div class="container">
       <div class="section-head-bar" style="border-bottom-color:rgba(255,255,255,0.15);">
         <div>
-          <div style="font-size:12px; font-weight:800; text-transform:uppercase; color:var(--rollmann-cyan); letter-spacing:0.06em; margin-bottom:4px;">THK Linear Bushing Nomenclature System</div>
+          <div style="font-size:12px; font-weight:800; text-transform:uppercase; color:var(--rollmann-cyan); letter-spacing:0.06em; margin-bottom:4px;">THK General Catalog No. 508-2E Specification Matrix</div>
           <h2 class="section-title" style="color:var(--white);">Part Number Breakdown &amp; <span style="color:var(--rollmann-cyan);">Guided Specifier</span></h2>
         </div>
         <div style="font-size:12.5px; color:var(--gray-300); max-width:480px; text-align:right;">
-          Step-by-step model configurator. Select shape, series, shaft diameter, length, and sealing to reveal exact JIS specifications and stock status.
+          Interactive THK model configurator and conversational part code decoder. Choose series, bore diameter, length, and seal to inspect authentic engineering parameters and warehouse availability.
+        </div>
+      </div>
+
+      <div class="guided-chat-wrapper">
+        <div class="guided-chat-header">
+          <div class="guided-bot-avatar">
+            <i class="fa-solid fa-microchip"></i>
+          </div>
+          <div style="flex:1;">
+            <div class="guided-bot-title">Interactive Part Code Assistant &bull; THK Nomenclature Guide</div>
+            <div class="guided-bot-prompt" id="guidedChatPrompt">Step 1: Enter or select Part Series (e.g. "LM", "LMF", "LMK", "LMH") or Shape (e.g. "Round Flange"):</div>
+          </div>
+          <span class="guided-step-badge" id="guidedStepBadge">Step 1 of 4</span>
+        </div>
+        <div class="guided-chat-input-row">
+          <div class="guided-input-inner">
+            <i class="fa-solid fa-terminal" style="color:var(--rollmann-cyan); font-size:13px; margin-left:12px;"></i>
+            <input type="text" id="guidedChatInput" class="guided-chat-input" placeholder="Type here (e.g. 'LM', 'LMF', 'Round Flange')..." autocomplete="off" />
+          </div>
+          <button type="button" id="guidedChatSubmit" class="btn-primary" style="padding:9px 20px; font-size:12.5px; border-radius:6px;">Next &rarr;</button>
+          <button type="button" id="guidedChatReset" class="btn-secondary" style="padding:9px 16px; font-size:12.5px; border-radius:6px; color:var(--navy-deep); border-color:var(--gray-300); background:#fff;">Reset</button>
+        </div>
+        <div class="guided-chips-row" id="guidedChatChips">
+          <button type="button" class="guided-chip" data-step="1" data-val="LM"><i class="fa-solid fa-circle-notch"></i> No Flange (LM)</button>
+          <button type="button" class="guided-chip" data-step="1" data-val="LMF"><i class="fa-regular fa-circle"></i> Round Flange (LMF)</button>
+          <button type="button" class="guided-chip" data-step="1" data-val="LMK"><i class="fa-regular fa-square"></i> Square Flange (LMK)</button>
+          <button type="button" class="guided-chip" data-step="1" data-val="LMH"><i class="fa-solid fa-ellipsis"></i> Oval Flange (LMH)</button>
         </div>
       </div>
 
@@ -833,7 +860,7 @@
           <div class="wizard-step" id="step2Container">
             <div class="wizard-step-header">
               <span class="wizard-step-badge">Step 2 &bull; Size</span>
-              <span class="wizard-step-title">Select Shaft / Bore Diameter (mm)</span>
+              <span class="wizard-step-title">Select Shaft Bore Diameter (mm)</span>
             </div>
             <div class="wizard-pills-row" id="diaQuickPills">
               <button type="button" class="wizard-pill" data-dia="6">&Oslash; 6 mm</button>
@@ -853,20 +880,20 @@
               <span class="wizard-step-title">Select Bushing Length Specification</span>
             </div>
             <div class="wizard-pills-row" id="lengthQuickPills">
+              <button type="button" class="wizard-pill" data-len="small">Small (Compact &bull; "S")</button>
               <button type="button" class="wizard-pill active" data-len="normal">Normal (Standard)</button>
               <button type="button" class="wizard-pill" data-len="long">Long (Double Length &bull; "L")</button>
-              <button type="button" class="wizard-pill" data-len="small">Small (Compact &bull; "S")</button>
             </div>
           </div>
 
           <div class="wizard-step" id="step4Container">
             <div class="wizard-step-header">
               <span class="wizard-step-badge">Step 4 &bull; Seal &amp; Retainer</span>
-              <span class="wizard-step-title">Select Seal Specification</span>
+              <span class="wizard-step-title">Select Seal / Cage Specification</span>
             </div>
             <div class="wizard-pills-row" id="sealQuickPills">
-              <button type="button" class="wizard-pill active" data-seal="UU">UU Seal (Double Rubber Lip)</button>
               <button type="button" class="wizard-pill" data-seal="none">No Seal (Open Ends)</button>
+              <button type="button" class="wizard-pill active" data-seal="UU">UU Seal (Double Rubber Lip)</button>
               <button type="button" class="wizard-pill" data-seal="cage">Steel Cage (High-Temp Metal "GA")</button>
             </div>
           </div>
@@ -875,7 +902,7 @@
         <div class="breakdown-result-card" id="breakdownResultBox">
           <div class="result-header">
             <div>
-              <span class="result-brand-tag" id="resBrandTag">THK JAPAN AUTHENTIC</span>
+              <span class="result-brand-tag" id="resBrandTag">THK JAPAN AUTHENTIC &bull; Cat. 508-2E</span>
               <div class="result-part-code" id="resPartCode">LM20UU</div>
               <div class="result-part-name" id="resPartName">No Flange Cylindrical Linear Bushing</div>
             </div>
@@ -892,7 +919,7 @@
             <div class="nomen-sep">+</div>
             <div class="nomen-token">
               <span class="nomen-val" id="nomToken2">20</span>
-              <span class="nomen-lbl" id="nomLbl2">20mm Shaft Diameter</span>
+              <span class="nomen-lbl" id="nomLbl2">&Oslash;20mm Shaft Inscribed Dia</span>
             </div>
             <div class="nomen-sep">+</div>
             <div class="nomen-token">
@@ -908,7 +935,7 @@
 
           <div class="result-specs-grid" id="resSpecsGrid">
             <div class="res-spec-item">
-              <span class="spec-label">Shaft Diameter (&Oslash;dr)</span>
+              <span class="spec-label">Shaft Bore Diameter (&Oslash;dr)</span>
               <strong class="spec-val" id="specValDr">20 mm</strong>
             </div>
             <div class="res-spec-item">
@@ -921,11 +948,11 @@
             </div>
             <div class="res-spec-item">
               <span class="spec-label">Overall Length (L)</span>
-              <strong class="spec-val" id="specValL">42 mm</strong>
+              <strong class="spec-val" id="specValL">42 mm (Mass 87g)</strong>
             </div>
             <div class="res-spec-item">
               <span class="spec-label">Basic Dynamic Load (C)</span>
-              <strong class="spec-val" id="specValC">860 N</strong>
+              <strong class="spec-val" id="specValC">863 N</strong>
             </div>
             <div class="res-spec-item">
               <span class="spec-label">Basic Static Load (C0)</span>
@@ -936,13 +963,13 @@
               <strong class="spec-val" id="specValFit">ISO 286 g6 / h6</strong>
             </div>
             <div class="res-spec-item">
-              <span class="spec-label">Housing Fit</span>
-              <strong class="spec-val" id="specValHousing">ISO 286 H7</strong>
+              <span class="spec-label">Recommended Housing Fit</span>
+              <strong class="spec-val" id="specValHousing">ISO 286 H7 (Loose) / J7 (Transition)</strong>
             </div>
           </div>
 
           <div class="result-actions-row">
-            <a href="linear-bush.html" id="resCadLink" class="btn-primary" style="flex:1; justify-content:center;">
+            <a href="linear-bush.html?model=LM20UU" id="resCadLink" class="btn-primary" style="flex:1; justify-content:center;">
               <i class="fa-solid fa-cube"></i> Open 3D Configurator &rarr;
             </a>
             <button type="button" class="btn-secondary" id="resAddBomBtn" style="color:var(--navy-deep); border-color:var(--gray-300);">
@@ -956,14 +983,25 @@
       </div>
 
       <div class="nomen-ref-table-wrap">
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:6px;">
-          <h3 style="font-size:16px; font-weight:800; color:var(--white); display:flex; align-items:center; gap:8px;">
-            <i class="fa-solid fa-table-list" style="color:var(--rollmann-cyan);"></i> Official THK Linear Bushing Nomenclature Matrix
-          </h3>
-          <span style="font-size:12px; color:var(--gray-400);">Click any row to instantly load into the decoder above</span>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+          <div>
+            <h3 style="font-size:16px; font-weight:800; color:var(--white); display:flex; align-items:center; gap:8px; margin:0 0 4px 0;">
+              <i class="fa-solid fa-table-cells" style="color:var(--rollmann-cyan);"></i> Official THK Model Specification Matrix
+            </h3>
+            <div style="font-size:12px; color:var(--gray-300);">Direct reference from THK General Catalog No. 508-2E. Click any row or cell to load instantly into the decoder.</div>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button type="button" class="btn-primary" id="btnQuickRedEx" style="padding:6px 14px; font-size:11.5px; background:#EF4444; border-color:#EF4444;">
+              <i class="fa-solid fa-circle-check"></i> Load LMF20UU (Red Example)
+            </button>
+            <button type="button" class="btn-primary" id="btnQuickBlueEx" style="padding:6px 14px; font-size:11.5px; background:#2563EB; border-color:#2563EB;">
+              <i class="fa-solid fa-circle-check"></i> Load LMK10L (Blue Example)
+            </button>
+          </div>
         </div>
+
         <div style="overflow-x:auto;">
-          <table class="nomen-table">
+          <table class="user-spec-table">
             <thead>
               <tr>
                 <th>Shape</th>
@@ -971,46 +1009,41 @@
                 <th>Size</th>
                 <th>Length</th>
                 <th>Seal</th>
-                <th>Decoded Model Code</th>
-                <th>Action</th>
+                <th>Result Code</th>
               </tr>
             </thead>
             <tbody>
               <tr class="clickable-row" data-series="LM" data-dia="6" data-len="small" data-seal="none">
                 <td><strong>No Flange</strong></td>
-                <td><span style="color:var(--rollmann-cyan); font-weight:800; font-family:var(--font-mono);">LM</span></td>
+                <td><span class="series-tag">LM</span></td>
                 <td>6 mm</td>
                 <td>Small</td>
-                <td><span style="color:#60A5FA; font-weight:700;">No Seal</span></td>
+                <td><span style="color:#00ADEF; font-weight:700;">No Seal</span></td>
                 <td><span class="nomen-code-pill">LM6S</span></td>
-                <td><button type="button" class="wizard-pill" style="padding:3px 10px; font-size:11px;">Test &rarr;</button></td>
               </tr>
-              <tr class="clickable-row" data-series="LMF" data-dia="8" data-len="normal" data-seal="UU">
-                <td><strong style="color:#F87171;">Round Flange</strong></td>
-                <td><span style="color:#F87171; font-weight:800; font-family:var(--font-mono);">LMF</span></td>
+              <tr class="clickable-row highlight-red-row" data-series="LMF" data-dia="8" data-len="normal" data-seal="UU">
+                <td><strong style="color:#EF4444;">Round Flange</strong></td>
+                <td><span class="series-tag" style="color:#EF4444; border-color:#EF4444;">LMF</span></td>
                 <td>8 mm</td>
-                <td><span style="color:#F87171; font-weight:700;">Normal</span></td>
-                <td><span style="color:#F87171; font-weight:700;">UU Seal</span></td>
-                <td><span class="nomen-code-pill">LMF8UU</span></td>
-                <td><button type="button" class="wizard-pill" style="padding:3px 10px; font-size:11px;">Test &rarr;</button></td>
+                <td><span style="color:#EF4444; font-weight:700;">Normal</span></td>
+                <td><span style="color:#EF4444; font-weight:700;">UU Seal</span></td>
+                <td><span class="nomen-code-pill" style="border-color:#EF4444; color:#EF4444;">LMF8UU</span></td>
               </tr>
-              <tr class="clickable-row" data-series="LMK" data-dia="10" data-len="long" data-seal="cage">
-                <td><strong style="color:#60A5FA;">Square Flange</strong></td>
-                <td><span style="color:#60A5FA; font-weight:800; font-family:var(--font-mono);">LMK</span></td>
+              <tr class="clickable-row highlight-blue-row" data-series="LMK" data-dia="10" data-len="long" data-seal="cage">
+                <td><strong style="color:#00ADEF;">Square Flange</strong></td>
+                <td><span class="series-tag" style="color:#00ADEF; border-color:#00ADEF;">LMK</span></td>
                 <td>10 mm</td>
-                <td><span style="color:#60A5FA; font-weight:700;">Long</span></td>
+                <td><span style="color:#00ADEF; font-weight:700;">Long</span></td>
                 <td>Steel Cage</td>
-                <td><span class="nomen-code-pill">LMK10LGA</span></td>
-                <td><button type="button" class="wizard-pill" style="padding:3px 10px; font-size:11px;">Test &rarr;</button></td>
+                <td><span class="nomen-code-pill" style="border-color:#00ADEF; color:#00ADEF;">LMK10LGA</span></td>
               </tr>
-              <tr class="clickable-row" data-series="LMH" data-dia="20" data-len="normal" data-seal="UU">
+              <tr class="clickable-row highlight-red-row" data-series="LMH" data-dia="20" data-len="normal" data-seal="UU">
                 <td><strong>Oval Flange</strong></td>
-                <td><span style="color:var(--rollmann-cyan); font-weight:800; font-family:var(--font-mono);">LMH</span></td>
-                <td><strong style="color:#F87171;">20 mm</strong></td>
-                <td>Normal</td>
-                <td>UU Seal</td>
-                <td><span class="nomen-code-pill">LMH20UU</span></td>
-                <td><button type="button" class="wizard-pill" style="padding:3px 10px; font-size:11px;">Test &rarr;</button></td>
+                <td><span class="series-tag">LMH</span></td>
+                <td><strong style="color:#EF4444; font-size:14px;">20 mm</strong></td>
+                <td><span style="color:#EF4444; font-weight:700;">Normal</span></td>
+                <td><span style="color:#EF4444; font-weight:700;">UU Seal</span></td>
+                <td><span class="nomen-code-pill" style="border-color:#EF4444; color:#EF4444;">LMH20UU</span></td>
               </tr>
             </tbody>
           </table>
